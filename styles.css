@@ -1,0 +1,39 @@
+.hline {
+    border-top: 2px solid #b2b9c3; /* Adjust the thickness and color as needed */
+    margin: 20px 0; /* Adjust the spacing as needed */
+    margin-bottom: 5px;
+}
+
+
+
+.br0 {
+    display: block;
+    margin: 10px 0; /* Adjust the vertical space as needed */
+}
+
+.footnote {
+    font-size: 0.6em; /* Set the font size */
+    margin-top: 1px;  /* Set the space from the text above */
+}
+
+.notes {
+    position: absolute;
+    bottom: 10px; /* Adjust the distance from the bottom */
+    right: 10px;  /* Adjust the distance from the right */
+    font-size: 0.8em; /* Adjust the font size as needed */
+    background-color: rgba(255, 255, 255, 0.8); /* Optional: Add a background color with transparency */
+    padding: 5px; /* Optional: Add some padding */
+    border-radius: 5px; /* Optional: Add rounded corners */
+}
+
+
+img[src*='#left'] {
+    float: left;
+}
+img[src*='#right'] {
+    float: right;
+}
+img[src*='#center'] {
+    display: block;
+    margin: auto;
+}
