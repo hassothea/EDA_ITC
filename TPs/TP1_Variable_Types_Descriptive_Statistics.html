@@ -7561,10 +7561,14 @@ PHAUK Sokkey, PhD &amp; HAS Sothea, PhD
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [2]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [9]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="c1">#%pip install gapminder           # This is for installing the package</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># useful packages</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="c1">#%pip install gapminder  (for installing gapminder if you haven't had one)</span>
 <span class="kn">from</span> <span class="nn">gapminder</span> <span class="kn">import</span> <span class="n">gapminder</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"* Number of observations: </span><span class="si">{</span><span class="n">gapminder</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 <span class="n">gapminder</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
@@ -7585,7 +7589,7 @@ PHAUK Sokkey, PhD &amp; HAS Sothea, PhD
 </div>
 </div>
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[2]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[9]:</div>
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
 <div>
 <style scoped="">
@@ -7615,31 +7619,31 @@ PHAUK Sokkey, PhD &amp; HAS Sothea, PhD
 </thead>
 <tbody>
 <tr>
-<th>316</th>
-<td>Comoros</td>
-<td>Africa</td>
-<td>1972</td>
-<td>48.944</td>
-<td>250027</td>
-<td>1937.577675</td>
-</tr>
-<tr>
-<th>1653</th>
-<td>Vietnam</td>
-<td>Asia</td>
-<td>1997</td>
-<td>70.672</td>
-<td>76048996</td>
-<td>1385.896769</td>
-</tr>
-<tr>
-<th>144</th>
-<td>Bosnia and Herzegovina</td>
+<th>1424</th>
+<td>Spain</td>
 <td>Europe</td>
-<td>1952</td>
-<td>53.820</td>
-<td>2791000</td>
-<td>973.533195</td>
+<td>1992</td>
+<td>77.570</td>
+<td>39549438</td>
+<td>18603.064520</td>
+</tr>
+<tr>
+<th>269</th>
+<td>Chad</td>
+<td>Africa</td>
+<td>1977</td>
+<td>47.383</td>
+<td>4388260</td>
+<td>1133.984950</td>
+</tr>
+<tr>
+<th>135</th>
+<td>Bolivia</td>
+<td>Americas</td>
+<td>1967</td>
+<td>45.032</td>
+<td>4040665</td>
+<td>2586.886053</td>
 </tr>
 </tbody>
 </table>
@@ -7766,7 +7770,7 @@ PHAUK Sokkey, PhD &amp; HAS Sothea, PhD
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [3]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [2]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># To do</span>
@@ -7821,23 +7825,16 @@ PHAUK Sokkey, PhD &amp; HAS Sothea, PhD
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <ol>
-<li>Add the following three variables to the <code>gapminder</code> dataset using the instruction below.</li>
+<li>Add the following three variables to the <code>gapminder</code> dataset by grouping each quantitative variable into $3$ groups.</li>
 </ol>
 <ul>
-<li>Create variable <code>gdpQual</code> to be the column with three categories: [<strong>"developing"</strong>, <strong>"moderate"</strong>, <strong>"developed"</strong>] with the following conditions:<ul>
-<li>Draw $2$ random variables $u_1$ and $u_2$, uniformly distributed on $[-3,3]$,</li>
-<li>Split <code>gdpPercap</code> into three parts:<ul>
-<li>If <code>gdpPercap</code> $\leq q_{0.35} +u_1$ then set <code>gdpQual</code> to be <strong>"developing"</strong>.</li>
-<li>If $q_{0.35}+u_1 &lt;$ <code>gdpPercap</code> $\leq q_{0.65}+u_2$ then set <code>gdpQual</code> to be <strong>"developing"</strong>.</li>
-<li>If <code>gdpPercap</code> $&gt; q_{0.65}+u_2$ then set <code>gdpQual</code> to be <strong>"developed"</strong>,
-where $q_{p}$ denotes the $p$-quantile of the considered variable.</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>Create variable <code>popQual</code> with three categories: [<strong>"small"</strong>, <strong>"medium"</strong>, <strong>"large"</strong>] using the same method as before but with variable <code>pop</code>.</li>
+<li>Create variable <code>gdpQual</code> with three categories: [<strong>"developing"</strong>, <strong>"moderate"</strong>, <strong>"developed"</strong>] using variable <code>gdpPercap</code>.</li>
+<li>Create variable <code>popQual</code> with three categories: [<strong>"small"</strong>, <strong>"medium"</strong>, <strong>"large"</strong>] using variable <code>pop</code>.</li>
 <li>Create variable <code>lifeExpQual</code> with three categories: [<strong>"unhealthy"</strong>, <strong>"moderate"</strong>, <strong>"healthy"</strong>] using variable <code>lifeExp</code>.</li>
 </ul>
+<blockquote>
+<p>Hint: you may find <code>np.histogram</code> and <code>pd.cut</code> function helpful.</p>
+</blockquote>
 </div>
 </div>
 </div>
@@ -7846,7 +7843,7 @@ where $q_{p}$ denotes the $p$-quantile of the considered variable.</li>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [5]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [21]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># To do</span>
