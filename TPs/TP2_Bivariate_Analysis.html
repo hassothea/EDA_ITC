@@ -180,13 +180,37 @@ window.Quarto = {
 <blockquote class="blockquote">
 <p>Description:</p>
 </blockquote>
-<p><strong>c.</strong> We have previously described the relationship between population and life expectancy or GDP per capita. Now, show this by defining <strong>size</strong> of points according to variable <code>pop</code>.</p>
-<div id="cell-19" class="cell" data-execution_count="7">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># To do</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>c.</strong> We will try to confirm this using Analysis of Variance (ANOVA).</p>
+<p>In 2007, - Perform one way ANOVA on <code>lifeExp</code> and <code>continent</code> (you can use <code>f_oneway</code> from <code>scipy.stats</code> module).</p>
+<div id="cell-19" class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.stats <span class="im">import</span> f_oneway</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co"># To do</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p><strong>d.</strong> Now, directly visualize the relation between population and life expactancy, then the relation between population and GPD per Capita. Explain the resulting graphs.</p>
-<div id="cell-21" class="cell" data-execution_count="8">
+<ul>
+<li>Do the same with <code>gdpPercap</code> and <code>continent</code>.</li>
+</ul>
+<div id="cell-21" class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># To do</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>Are these results reliable? Why?</li>
+</ul>
+<blockquote class="blockquote">
+<p>Your response:</p>
+</blockquote>
+<ul>
+<li>Propose ideas that might solve this problem or an alternative method.</li>
+</ul>
+<blockquote class="blockquote">
+<p>Your response:</p>
+</blockquote>
+<p><strong>d.</strong> We have previously described the relationship between population and life expectancy or GDP per capita. Now, show this by defining <strong>size</strong> of points according to variable <code>pop</code>.</p>
+<div id="cell-24" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># To do</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>e.</strong> Now, directly visualize the relation between population and life expactancy, then the relation between population and GPD per Capita. Explain the resulting graphs.</p>
+<div id="cell-26" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># To do</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="time-evolution" class="level1">
@@ -197,12 +221,12 @@ window.Quarto = {
 <li><code>Plotly</code> on the other hand built as highly interactive plots with features like zooming, panning, and hover information. It works well in web applications and dashboards. There are extensive customization options for aesthetics, and it supports 3D visualizations, complex plots and animations. Read more here: <a href="https://plotly.com/python/">https://plotly.com/python/</a>.</li>
 </ul>
 <p><strong>a.</strong> Using <code>plotly</code>, create one scatterplot that summarizes the world using all information: <code>gdpPercap</code>, <code>lifeExp</code>, <code>pop</code>, <code>continent</code> and set option <strong>animation_frame=“year”</strong> which will create frame-by-frame animated scatterplot of the world from 1952 to 2007.</p>
-<div id="cell-23" class="cell" data-execution_count="9">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plotly.io <span class="im">as</span> pio</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>pio.renderers.default <span class="op">=</span> <span class="st">'notebook'</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plotly.express <span class="im">as</span> px</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co"># To do</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-28" class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plotly.io <span class="im">as</span> pio</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>pio.renderers.default <span class="op">=</span> <span class="st">'notebook'</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plotly.express <span class="im">as</span> px</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="co"># To do</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><strong>b.</strong> Describe what you observed: the world from 1952 to 2007.</p>
 <blockquote class="blockquote">
