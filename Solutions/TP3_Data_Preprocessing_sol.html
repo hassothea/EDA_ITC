@@ -359,7 +359,7 @@ Name: count, dtype: int64</code></pre>
 <li>What’s the mechanism/type of these missing values?</li>
 </ul>
 <blockquote class="blockquote">
-<p>As the majority of missing values are girls, this missing values are not <em>completely at random</em> (MCAR) nor <em>missing not at random</em> (NMAR), they are related to variable <code>GENRE</code> and therefore are MAR.</p>
+<p>As the majority of missing values are girls, these missing values are not <em>completely at random</em> (MCAR) nor <em>missing not at random</em> (NMAR), they are related to variable <code>GENRE</code> and therefore are MAR.</p>
 </blockquote>
 <p><strong>e.</strong> Do you spot any outliers in this dataset?</p>
 <blockquote class="blockquote">
@@ -368,7 +368,7 @@ Name: count, dtype: int64</code></pre>
 </section>
 <section id="outliers-high-leverage-data" class="level2">
 <h2 class="anchored" data-anchor-id="outliers-high-leverage-data">2. Outliers &amp; high leverage data</h2>
-<p>In an unsupervised framework, outliers are data points that significantly deviate from the majority of observations. In a supervised framework, inputs with extreme values (but not their target) are known as high leverage points. Both outliers and high leverage points may obscure (but not always) the true underlying patterns in the data, often complicating analysis and leading to potential inaccuracies. We will start hunting outliers and high leverage points using <a href="https://www.kaggle.com/datasets/rodolfomendes/abalone-dataset"><code>Abalone</code> dataset</a>.</p>
+<p>In an unsupervised framework, outliers are data points that significantly deviate from most observations. In a supervised framework, inputs with extreme values (but not their target) are known as high leverage points. Both outliers and high leverage points may obscure (but not always) the true underlying patterns in the data, often complicating analysis and leading to potential inaccuracies. We will start hunting outliers and high leverage points using <a href="https://www.kaggle.com/datasets/rodolfomendes/abalone-dataset"><code>Abalone</code> dataset</a>.</p>
 <p><strong>a.</strong> Download and import the dataset.</p>
 <div id="cell-21" class="cell" data-execution_count="141">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>Abalone <span class="op">=</span> pd.read_csv(<span class="st">"D:/Sothea_PC/Teaching_ITC/EDA/data/abalone.txt"</span>, sep<span class="op">=</span><span class="st">" "</span>).drop(columns<span class="op">=</span>[<span class="st">"Id"</span>])</span>
@@ -459,7 +459,7 @@ Name: count, dtype: int64</code></pre>
 </div>
 </div>
 </div>
-<p><strong>b.</strong> Compute and visualize the correaltion matrix. Provide your first impression on the correlation matrix.</p>
+<p><strong>b.</strong> Compute and visualize the correaltion matrix. Provide your first impression of the correlation matrix.</p>
 <div id="cell-23" class="cell" data-execution_count="142">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>Abalone.iloc[:,<span class="dv">1</span>:].corr().style.background_gradient()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="142">
@@ -740,7 +740,7 @@ Name: count, dtype: int64</code></pre>
 </div>
 </div>
 <blockquote class="blockquote">
-<p>The boxplot tells us that there seems to be some connection between <code>Type</code> and <code>Rings</code> as (Type <strong>I</strong> to the rest). The data also seems to respect the assumption of ANOVA (<strong>normality</strong> and <strong>homoscedasticity</strong>), so we confirm this using ANOVA test.</p>
+<p>The boxplot tells us that there seems to be a connection between <code>Type</code> and <code>Rings</code> (Type <strong>I</strong> seems to be different from other types). The data also seems to respect the assumption of ANOVA (<strong>normality</strong> and <strong>homoscedasticity</strong>), so we confirm this using ANOVA test.</p>
 </blockquote>
 <div id="cell-27" class="cell" data-execution_count="144">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.stats <span class="im">import</span> f_oneway</span>
