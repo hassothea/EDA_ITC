@@ -1,0 +1,1826 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.56">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>TP3 - Data Preprocessing</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="TP3_Data_Preprocessing_sol_files/libs/clipboard/clipboard.min.js"></script>
+<script src="TP3_Data_Preprocessing_sol_files/libs/quarto-html/quarto.js"></script>
+<script src="TP3_Data_Preprocessing_sol_files/libs/quarto-html/popper.min.js"></script>
+<script src="TP3_Data_Preprocessing_sol_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="TP3_Data_Preprocessing_sol_files/libs/quarto-html/anchor.min.js"></script>
+<link href="TP3_Data_Preprocessing_sol_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="TP3_Data_Preprocessing_sol_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="TP3_Data_Preprocessing_sol_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="TP3_Data_Preprocessing_sol_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="TP3_Data_Preprocessing_sol_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><strong>TP3 - Data Preprocessing</strong></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p><b>Exploratory Data Analysis &amp; Unsuperivsed Learning </b><br> <strong>Course: PHAUK Sokkey, PhD</strong> <br> <strong>TP: HAS Sothea, PhD</strong></p>
+<hr>
+<p><strong>Objective</strong>: Preprocessing is important in data related tasks. In this TP, you will explore different challanges you may encounted during when performing data preprocessing. We will discuss reasonable solution to these challanges.</p>
+<hr>
+<blockquote class="blockquote">
+<p><strong>The <code>Jupyter Notebook</code> for this TP can be downloaded here: <a href="https://hassothea.github.io/EDA_ITC/TPs/TP3_Data_Preprocessing.ipynb">TP3-Data-Preprocessing</a></strong>.</p>
+</blockquote>
+<hr>
+<section id="missing-data" class="level2">
+<h2 class="anchored" data-anchor-id="missing-data">1. Missing Data</h2>
+<p>We will begin with missing data which are very common within real-world datasets. One common question about missing values is “Should we remove them”? We will delve into possible proper solution to this problem.</p>
+<p>We will work with <code>Enfants</code> dataset available here: <a href="https://github.com/hassothea/EDA_ITC/blob/main/data/Enfants.txt">Enfants dataset</a>.</p>
+<p><strong>a.</strong> Import this data and name it <code>data</code>.</p>
+<div id="cell-5" class="cell" data-execution_count="133">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pd.read_table(<span class="st">"D:/Sothea_PC/Teaching_ITC/EDA\data/Enfants.txt"</span>, sep<span class="op">=</span><span class="st">"</span><span class="ch">\t</span><span class="st">"</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>data.head(<span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>&lt;&gt;:3: SyntaxWarning: invalid escape sequence '\d'
+&lt;&gt;:3: SyntaxWarning: invalid escape sequence '\d'
+C:\Users\hasso\AppData\Local\Temp\ipykernel_19972\610560642.py:3: SyntaxWarning: invalid escape sequence '\d'
+  data = pd.read_table("D:/Sothea_PC/Teaching_ITC/EDA\data/Enfants.txt", sep="\t")</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="133">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">GENRE</th>
+<th data-quarto-table-cell-role="th">AGE</th>
+<th data-quarto-table-cell-role="th">TAILLE</th>
+<th data-quarto-table-cell-role="th">MASSE</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>F</td>
+<td>68</td>
+<td>0</td>
+<td>20</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>M</td>
+<td>74</td>
+<td>116</td>
+<td>18</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>M</td>
+<td>69</td>
+<td>120</td>
+<td>23</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>M</td>
+<td>72</td>
+<td>121</td>
+<td>25</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>M</td>
+<td>73</td>
+<td>114</td>
+<td>17</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p><strong>b.</strong> Compute statistical values and visualize the distribution of each variable.</p>
+<ul>
+<li>Stastistics</li>
+</ul>
+<div id="cell-7" class="cell" data-execution_count="134">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>data.describe().transpose().drop(columns<span class="op">=</span>[<span class="st">"count"</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="134">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">mean</th>
+<th data-quarto-table-cell-role="th">std</th>
+<th data-quarto-table-cell-role="th">min</th>
+<th data-quarto-table-cell-role="th">25%</th>
+<th data-quarto-table-cell-role="th">50%</th>
+<th data-quarto-table-cell-role="th">75%</th>
+<th data-quarto-table-cell-role="th">max</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">AGE</td>
+<td>68.570836</td>
+<td>4.087658</td>
+<td>49.0</td>
+<td>66.0</td>
+<td>69.0</td>
+<td>72.0</td>
+<td>86.0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">TAILLE</td>
+<td>90.627505</td>
+<td>46.039818</td>
+<td>0.0</td>
+<td>106.0</td>
+<td>112.0</td>
+<td>116.0</td>
+<td>139.0</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">MASSE</td>
+<td>18.878369</td>
+<td>6.634948</td>
+<td>0.0</td>
+<td>18.0</td>
+<td>20.0</td>
+<td>22.0</td>
+<td>40.0</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div id="cell-8" class="cell" data-execution_count="135">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>data[<span class="st">"GENRE"</span>].value_counts()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="135">
+<pre><code>GENRE
+M    1492
+F    1402
+Name: count, dtype: int64</code></pre>
+</div>
+</div>
+<ul>
+<li>Visualization</li>
+</ul>
+<div id="cell-10" class="cell" data-execution_count="136">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>names <span class="op">=</span> data.columns</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>_, ax <span class="op">=</span> plt.subplots(<span class="dv">1</span>,<span class="dv">3</span>, figsize<span class="op">=</span>(<span class="dv">9</span>, <span class="dv">4</span>))</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>i <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> var <span class="kw">in</span> names:</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> var <span class="op">!=</span> <span class="st">"GENRE"</span>:</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>        sns.histplot(data, x<span class="op">=</span>var, kde<span class="op">=</span><span class="va">True</span>, ax<span class="op">=</span>ax[i], binwidth<span class="op">=</span><span class="dv">3</span>)</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>        ax[i].set_title(<span class="ss">f"Distribution of </span><span class="sc">{</span>var<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>        i <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="TP3_Data_Preprocessing_sol_files/figure-html/cell-5-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="cell-11" class="cell" data-execution_count="137">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>sns.countplot(data<span class="op">=</span>data, x<span class="op">=</span><span class="st">"GENRE"</span>, hue<span class="op">=</span><span class="st">"GENRE"</span>, legend<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="TP3_Data_Preprocessing_sol_files/figure-html/cell-6-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>c.</strong> Did you find anything strange in the previous graphs?</p>
+<blockquote class="blockquote">
+<p>Your response: It appears that there are children who have height or weight equal to <span class="math inline">\(0\)</span>. This seems to be missing data.</p>
+</blockquote>
+<p><strong>d.</strong> Create new data called <code>data_NoNA</code> by replacing all missing values with <code>np.nan</code>. Remove all the rows containing missing values. - Repeat point <strong>(b)</strong> on <code>data_NoNA</code> data. - Compare the distribution of these variables before and after removing missing values.</p>
+<div id="cell-14" class="cell" data-execution_count="138">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Replacing missing values by nan</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>data.loc[data.TAILLE <span class="op">==</span> <span class="dv">0</span>, <span class="st">"TAILLE"</span>] <span class="op">=</span> np.nan</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>data.loc[data.MASSE <span class="op">==</span> <span class="dv">0</span>, <span class="st">"MASSE"</span>] <span class="op">=</span> np.nan</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>data_NoNA <span class="op">=</span> data.loc[<span class="op">~</span>(data[<span class="st">'TAILLE'</span>].isna() <span class="op">|</span> data[<span class="st">'MASSE'</span>].isna()), :]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="cell-15" class="cell" data-execution_count="139">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>_, ax <span class="op">=</span> plt.subplots(<span class="dv">1</span>,<span class="dv">3</span>, figsize<span class="op">=</span>(<span class="dv">9</span>, <span class="dv">4</span>))</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>i <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> var <span class="kw">in</span> names:</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> var <span class="op">!=</span> <span class="st">"GENRE"</span>:</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>        sns.histplot(data_NoNA, x<span class="op">=</span>var, kde<span class="op">=</span><span class="va">True</span>, ax<span class="op">=</span>ax[i], binwidth<span class="op">=</span><span class="dv">3</span>)</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>        ax[i].set_title(<span class="ss">f"Distribution of </span><span class="sc">{</span>var<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>        i <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="TP3_Data_Preprocessing_sol_files/figure-html/cell-8-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="cell-16" class="cell" data-execution_count="140">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Genre</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>sns.countplot(data<span class="op">=</span>data_NoNA, x <span class="op">=</span> <span class="st">"GENRE"</span>, hue<span class="op">=</span><span class="st">"GENRE"</span>, legend<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="TP3_Data_Preprocessing_sol_files/figure-html/cell-9-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li>What do you observe?</li>
+</ul>
+<blockquote class="blockquote">
+<p>The distribution of <code>AGE</code> remains similar to the original data even after removing the missing values. On the other hand, the distribution of <code>GENRE</code> changes after removing missing values.</p>
+</blockquote>
+<ul>
+<li>What’s the mechanism/type of these missing values?</li>
+</ul>
+<blockquote class="blockquote">
+<p>As the majority of missing values are girls, this missing values are not <em>completely at random</em> (MCAR) nor <em>missing not at random</em> (NMAR), they are related to variable <code>GENRE</code> and therefore are MAR.</p>
+</blockquote>
+<p><strong>e.</strong> Do you spot any outliers in this dataset?</p>
+<blockquote class="blockquote">
+<p>Not really!</p>
+</blockquote>
+</section>
+<section id="outliers-high-leverage-data" class="level2">
+<h2 class="anchored" data-anchor-id="outliers-high-leverage-data">2. Outliers &amp; high leverage data</h2>
+<p>In an unsupervised framework, outliers are data points that significantly deviate from the majority of observations. In a supervised framework, inputs with extreme values (but not their target) are known as high leverage points. Both outliers and high leverage points may obscure (but not always) the true underlying patterns in the data, often complicating analysis and leading to potential inaccuracies. We will start hunting outliers and high leverage points using <a href="https://www.kaggle.com/datasets/rodolfomendes/abalone-dataset"><code>Abalone</code> dataset</a>.</p>
+<p><strong>a.</strong> Download and import the dataset.</p>
+<div id="cell-21" class="cell" data-execution_count="141">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>Abalone <span class="op">=</span> pd.read_csv(<span class="st">"D:/Sothea_PC/Teaching_ITC/EDA/data/abalone.txt"</span>, sep<span class="op">=</span><span class="st">" "</span>).drop(columns<span class="op">=</span>[<span class="st">"Id"</span>])</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>Abalone.sample(<span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="141">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Type</th>
+<th data-quarto-table-cell-role="th">LongestShell</th>
+<th data-quarto-table-cell-role="th">Diameter</th>
+<th data-quarto-table-cell-role="th">Height</th>
+<th data-quarto-table-cell-role="th">WholeWeight</th>
+<th data-quarto-table-cell-role="th">ShuckedWeight</th>
+<th data-quarto-table-cell-role="th">VisceraWeight</th>
+<th data-quarto-table-cell-role="th">ShellWeight</th>
+<th data-quarto-table-cell-role="th">Rings</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">3579</td>
+<td>F</td>
+<td>0.600</td>
+<td>0.485</td>
+<td>0.145</td>
+<td>0.7760</td>
+<td>0.3545</td>
+<td>0.1585</td>
+<td>0.239</td>
+<td>9</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">4012</td>
+<td>F</td>
+<td>0.620</td>
+<td>0.465</td>
+<td>0.140</td>
+<td>1.0110</td>
+<td>0.4790</td>
+<td>0.2385</td>
+<td>0.255</td>
+<td>8</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">692</td>
+<td>F</td>
+<td>0.430</td>
+<td>0.325</td>
+<td>0.115</td>
+<td>0.3865</td>
+<td>0.1475</td>
+<td>0.1065</td>
+<td>0.110</td>
+<td>11</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">116</td>
+<td>F</td>
+<td>0.490</td>
+<td>0.375</td>
+<td>0.135</td>
+<td>0.6125</td>
+<td>0.2555</td>
+<td>0.1020</td>
+<td>0.220</td>
+<td>11</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">493</td>
+<td>M</td>
+<td>0.655</td>
+<td>0.530</td>
+<td>0.175</td>
+<td>1.2635</td>
+<td>0.4860</td>
+<td>0.2635</td>
+<td>0.415</td>
+<td>15</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p><strong>b.</strong> Compute and visualize the correaltion matrix. Provide your first impression on the correlation matrix.</p>
+<div id="cell-23" class="cell" data-execution_count="142">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>Abalone.iloc[:,<span class="dv">1</span>:].corr().style.background_gradient()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="142">
+<style type="text/css">
+#T_a0265_row0_col0, #T_a0265_row1_col1, #T_a0265_row2_col2, #T_a0265_row3_col3, #T_a0265_row4_col4, #T_a0265_row5_col5, #T_a0265_row6_col6, #T_a0265_row7_col7 {
+  background-color: #023858;
+  color: #f1f1f1;
+}
+#T_a0265_row0_col1, #T_a0265_row1_col0 {
+  background-color: #023f64;
+  color: #f1f1f1;
+}
+#T_a0265_row0_col2, #T_a0265_row2_col0, #T_a0265_row2_col4 {
+  background-color: #3d93c2;
+  color: #f1f1f1;
+}
+#T_a0265_row0_col3, #T_a0265_row1_col3 {
+  background-color: #046097;
+  color: #f1f1f1;
+}
+#T_a0265_row0_col4 {
+  background-color: #04639b;
+  color: #f1f1f1;
+}
+#T_a0265_row0_col5 {
+  background-color: #0567a1;
+  color: #f1f1f1;
+}
+#T_a0265_row0_col6 {
+  background-color: #0f76b3;
+  color: #f1f1f1;
+}
+#T_a0265_row0_col7, #T_a0265_row2_col7 {
+  background-color: #d3d4e7;
+  color: #000000;
+}
+#T_a0265_row1_col2 {
+  background-color: #3790c0;
+  color: #f1f1f1;
+}
+#T_a0265_row1_col4, #T_a0265_row6_col5 {
+  background-color: #04649e;
+  color: #f1f1f1;
+}
+#T_a0265_row1_col5, #T_a0265_row6_col4 {
+  background-color: #0567a2;
+  color: #f1f1f1;
+}
+#T_a0265_row1_col6 {
+  background-color: #0771b1;
+  color: #f1f1f1;
+}
+#T_a0265_row1_col7 {
+  background-color: #cccfe5;
+  color: #000000;
+}
+#T_a0265_row2_col1, #T_a0265_row2_col3 {
+  background-color: #3f93c2;
+  color: #f1f1f1;
+}
+#T_a0265_row2_col5, #T_a0265_row3_col2 {
+  background-color: #4697c4;
+  color: #f1f1f1;
+}
+#T_a0265_row2_col6 {
+  background-color: #6fa7ce;
+  color: #f1f1f1;
+}
+#T_a0265_row3_col0 {
+  background-color: #046299;
+  color: #f1f1f1;
+}
+#T_a0265_row3_col1 {
+  background-color: #04629a;
+  color: #f1f1f1;
+}
+#T_a0265_row3_col4 {
+  background-color: #03466e;
+  color: #f1f1f1;
+}
+#T_a0265_row3_col5, #T_a0265_row4_col3 {
+  background-color: #034a74;
+  color: #f1f1f1;
+}
+#T_a0265_row3_col6, #T_a0265_row5_col4 {
+  background-color: #04588a;
+  color: #f1f1f1;
+}
+#T_a0265_row3_col7 {
+  background-color: #dad9ea;
+  color: #000000;
+}
+#T_a0265_row4_col0 {
+  background-color: #056caa;
+  color: #f1f1f1;
+}
+#T_a0265_row4_col1 {
+  background-color: #0570b0;
+  color: #f1f1f1;
+}
+#T_a0265_row4_col2 {
+  background-color: #78abd0;
+  color: #f1f1f1;
+}
+#T_a0265_row4_col5 {
+  background-color: #045c90;
+  color: #f1f1f1;
+}
+#T_a0265_row4_col6 {
+  background-color: #1e80b8;
+  color: #f1f1f1;
+}
+#T_a0265_row4_col7, #T_a0265_row7_col0, #T_a0265_row7_col1, #T_a0265_row7_col2, #T_a0265_row7_col3, #T_a0265_row7_col4, #T_a0265_row7_col5, #T_a0265_row7_col6 {
+  background-color: #fff7fb;
+  color: #000000;
+}
+#T_a0265_row5_col0, #T_a0265_row6_col1 {
+  background-color: #056ba7;
+  color: #f1f1f1;
+}
+#T_a0265_row5_col1 {
+  background-color: #056dac;
+  color: #f1f1f1;
+}
+#T_a0265_row5_col2 {
+  background-color: #5ea0ca;
+  color: #f1f1f1;
+}
+#T_a0265_row5_col3 {
+  background-color: #034b76;
+  color: #f1f1f1;
+}
+#T_a0265_row5_col6 {
+  background-color: #056faf;
+  color: #f1f1f1;
+}
+#T_a0265_row5_col7 {
+  background-color: #e8e4f0;
+  color: #000000;
+}
+#T_a0265_row6_col0 {
+  background-color: #056dab;
+  color: #f1f1f1;
+}
+#T_a0265_row6_col2 {
+  background-color: #4897c4;
+  color: #f1f1f1;
+}
+#T_a0265_row6_col3 {
+  background-color: #045280;
+  color: #f1f1f1;
+}
+#T_a0265_row6_col7 {
+  background-color: #acc0dd;
+  color: #000000;
+}
+</style>
+
+<table id="T_a0265" class="caption-top table table-sm table-striped small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th class="blank level0" data-quarto-table-cell-role="th">&nbsp;</th>
+<th id="T_a0265_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">LongestShell</th>
+<th id="T_a0265_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Diameter</th>
+<th id="T_a0265_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">Height</th>
+<th id="T_a0265_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">WholeWeight</th>
+<th id="T_a0265_level0_col4" class="col_heading level0 col4" data-quarto-table-cell-role="th">ShuckedWeight</th>
+<th id="T_a0265_level0_col5" class="col_heading level0 col5" data-quarto-table-cell-role="th">VisceraWeight</th>
+<th id="T_a0265_level0_col6" class="col_heading level0 col6" data-quarto-table-cell-role="th">ShellWeight</th>
+<th id="T_a0265_level0_col7" class="col_heading level0 col7" data-quarto-table-cell-role="th">Rings</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td id="T_a0265_level0_row0" class="row_heading level0 row0" data-quarto-table-cell-role="th">LongestShell</td>
+<td id="T_a0265_row0_col0" class="data row0 col0">1.000000</td>
+<td id="T_a0265_row0_col1" class="data row0 col1">0.986812</td>
+<td id="T_a0265_row0_col2" class="data row0 col2">0.827554</td>
+<td id="T_a0265_row0_col3" class="data row0 col3">0.925261</td>
+<td id="T_a0265_row0_col4" class="data row0 col4">0.897914</td>
+<td id="T_a0265_row0_col5" class="data row0 col5">0.903018</td>
+<td id="T_a0265_row0_col6" class="data row0 col6">0.897706</td>
+<td id="T_a0265_row0_col7" class="data row0 col7">0.556720</td>
+</tr>
+<tr class="even">
+<td id="T_a0265_level0_row1" class="row_heading level0 row1" data-quarto-table-cell-role="th">Diameter</td>
+<td id="T_a0265_row1_col0" class="data row1 col0">0.986812</td>
+<td id="T_a0265_row1_col1" class="data row1 col1">1.000000</td>
+<td id="T_a0265_row1_col2" class="data row1 col2">0.833684</td>
+<td id="T_a0265_row1_col3" class="data row1 col3">0.925452</td>
+<td id="T_a0265_row1_col4" class="data row1 col4">0.893162</td>
+<td id="T_a0265_row1_col5" class="data row1 col5">0.899724</td>
+<td id="T_a0265_row1_col6" class="data row1 col6">0.905330</td>
+<td id="T_a0265_row1_col7" class="data row1 col7">0.574660</td>
+</tr>
+<tr class="odd">
+<td id="T_a0265_level0_row2" class="row_heading level0 row2" data-quarto-table-cell-role="th">Height</td>
+<td id="T_a0265_row2_col0" class="data row2 col0">0.827554</td>
+<td id="T_a0265_row2_col1" class="data row2 col1">0.833684</td>
+<td id="T_a0265_row2_col2" class="data row2 col2">1.000000</td>
+<td id="T_a0265_row2_col3" class="data row2 col3">0.819221</td>
+<td id="T_a0265_row2_col4" class="data row2 col4">0.774972</td>
+<td id="T_a0265_row2_col5" class="data row2 col5">0.798319</td>
+<td id="T_a0265_row2_col6" class="data row2 col6">0.817338</td>
+<td id="T_a0265_row2_col7" class="data row2 col7">0.557467</td>
+</tr>
+<tr class="even">
+<td id="T_a0265_level0_row3" class="row_heading level0 row3" data-quarto-table-cell-role="th">WholeWeight</td>
+<td id="T_a0265_row3_col0" class="data row3 col0">0.925261</td>
+<td id="T_a0265_row3_col1" class="data row3 col1">0.925452</td>
+<td id="T_a0265_row3_col2" class="data row3 col2">0.819221</td>
+<td id="T_a0265_row3_col3" class="data row3 col3">1.000000</td>
+<td id="T_a0265_row3_col4" class="data row3 col4">0.969405</td>
+<td id="T_a0265_row3_col5" class="data row3 col5">0.966375</td>
+<td id="T_a0265_row3_col6" class="data row3 col6">0.955355</td>
+<td id="T_a0265_row3_col7" class="data row3 col7">0.540390</td>
+</tr>
+<tr class="odd">
+<td id="T_a0265_level0_row4" class="row_heading level0 row4" data-quarto-table-cell-role="th">ShuckedWeight</td>
+<td id="T_a0265_row4_col0" class="data row4 col0">0.897914</td>
+<td id="T_a0265_row4_col1" class="data row4 col1">0.893162</td>
+<td id="T_a0265_row4_col2" class="data row4 col2">0.774972</td>
+<td id="T_a0265_row4_col3" class="data row4 col3">0.969405</td>
+<td id="T_a0265_row4_col4" class="data row4 col4">1.000000</td>
+<td id="T_a0265_row4_col5" class="data row4 col5">0.931961</td>
+<td id="T_a0265_row4_col6" class="data row4 col6">0.882617</td>
+<td id="T_a0265_row4_col7" class="data row4 col7">0.420884</td>
+</tr>
+<tr class="even">
+<td id="T_a0265_level0_row5" class="row_heading level0 row5" data-quarto-table-cell-role="th">VisceraWeight</td>
+<td id="T_a0265_row5_col0" class="data row5 col0">0.903018</td>
+<td id="T_a0265_row5_col1" class="data row5 col1">0.899724</td>
+<td id="T_a0265_row5_col2" class="data row5 col2">0.798319</td>
+<td id="T_a0265_row5_col3" class="data row5 col3">0.966375</td>
+<td id="T_a0265_row5_col4" class="data row5 col4">0.931961</td>
+<td id="T_a0265_row5_col5" class="data row5 col5">1.000000</td>
+<td id="T_a0265_row5_col6" class="data row5 col6">0.907656</td>
+<td id="T_a0265_row5_col7" class="data row5 col7">0.503819</td>
+</tr>
+<tr class="odd">
+<td id="T_a0265_level0_row6" class="row_heading level0 row6" data-quarto-table-cell-role="th">ShellWeight</td>
+<td id="T_a0265_row6_col0" class="data row6 col0">0.897706</td>
+<td id="T_a0265_row6_col1" class="data row6 col1">0.905330</td>
+<td id="T_a0265_row6_col2" class="data row6 col2">0.817338</td>
+<td id="T_a0265_row6_col3" class="data row6 col3">0.955355</td>
+<td id="T_a0265_row6_col4" class="data row6 col4">0.882617</td>
+<td id="T_a0265_row6_col5" class="data row6 col5">0.907656</td>
+<td id="T_a0265_row6_col6" class="data row6 col6">1.000000</td>
+<td id="T_a0265_row6_col7" class="data row6 col7">0.627574</td>
+</tr>
+<tr class="even">
+<td id="T_a0265_level0_row7" class="row_heading level0 row7" data-quarto-table-cell-role="th">Rings</td>
+<td id="T_a0265_row7_col0" class="data row7 col0">0.556720</td>
+<td id="T_a0265_row7_col1" class="data row7 col1">0.574660</td>
+<td id="T_a0265_row7_col2" class="data row7 col2">0.557467</td>
+<td id="T_a0265_row7_col3" class="data row7 col3">0.540390</td>
+<td id="T_a0265_row7_col4" class="data row7 col4">0.420884</td>
+<td id="T_a0265_row7_col5" class="data row7 col5">0.503819</td>
+<td id="T_a0265_row7_col6" class="data row7 col6">0.627574</td>
+<td id="T_a0265_row7_col7" class="data row7 col7">1.000000</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><strong>c.</strong> Study the relation between <code>Type</code> and the most interesting variable (target) <code>Rings</code>.</p>
+<div id="cell-25" class="cell" data-execution_count="143">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>sns.<span class="bu">set</span>(style<span class="op">=</span><span class="st">"whitegrid"</span>)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> sns.boxplot(data<span class="op">=</span>Abalone, y <span class="op">=</span> <span class="st">"Rings"</span>, hue<span class="op">=</span><span class="st">"Type"</span>)</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">"Rings vs Type of Abalone"</span>)</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="TP3_Data_Preprocessing_sol_files/figure-html/cell-12-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<blockquote class="blockquote">
+<p>The boxplot tells us that there seems to be some connection between <code>Type</code> and <code>Rings</code> as (Type <strong>I</strong> to the rest). The data also seems to respect the assumption of ANOVA (<strong>normality</strong> and <strong>homoscedasticity</strong>), so we confirm this using ANOVA test.</p>
+</blockquote>
+<div id="cell-27" class="cell" data-execution_count="144">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.stats <span class="im">import</span> f_oneway</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>f_oneway(<span class="op">*</span>[Abalone.Rings[Abalone[<span class="st">'Type'</span>] <span class="op">==</span> np.unique(Abalone[[<span class="st">'Type'</span>]])[i]] <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">3</span>)])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="144">
+<pre><code>F_onewayResult(statistic=499.33254468883257, pvalue=3.724620497195191e-195)</code></pre>
+</div>
+</div>
+<blockquote class="blockquote">
+<p>We can reject the hypothesis of having equal means for all group!</p>
+</blockquote>
+<p><strong>d.</strong> Insepct outliers and high leverage data points (considering <code>Rings</code> as the target) in the dataset. You might be interested in reading the following posts from STAT 501: - <a href="https://online.stat.psu.edu/stat501/lesson/11/11.2">Using Leverages to Help Identify Extreme x Values, STAT 501</a> - <a href="https://online.stat.psu.edu/stat501/lesson/11/11.3">Identifying Outliers (Unusual y Values), STAT 501</a></p>
+<div id="cell-30" class="cell" data-execution_count="145">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> sns.boxplot(Abalone.iloc[:,<span class="dv">1</span>:].melt(), x<span class="op">=</span><span class="st">"value"</span>, hue<span class="op">=</span><span class="st">"variable"</span>)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>ax.set_xscale(<span class="st">"log"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="TP3_Data_Preprocessing_sol_files/figure-html/cell-14-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>e.</strong> Once again, study the correlation matrix of the data after removing outliers and leverage data points. Conclude.</p>
+<div id="cell-32" class="cell" data-execution_count="146">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> remove_outliers_iqr(data):</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    Q1 <span class="op">=</span> data.quantile(<span class="fl">0.25</span>)</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    Q3 <span class="op">=</span> data.quantile(<span class="fl">0.75</span>)</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>    IQR <span class="op">=</span> Q3 <span class="op">-</span> Q1</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>    ID_out <span class="op">=</span> np.logical_or(data <span class="op">&lt;</span> (Q1 <span class="op">-</span> <span class="fl">1.5</span> <span class="op">*</span> IQR), data <span class="op">&gt;</span> (Q3 <span class="op">+</span> <span class="fl">1.5</span> <span class="op">*</span> IQR))</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> ID_out.values.reshape(<span class="op">-</span><span class="dv">1</span>)</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>ids <span class="op">=</span> {x: remove_outliers_iqr(Abalone[[x]]) <span class="cf">for</span> x <span class="kw">in</span> Abalone.columns[<span class="dv">1</span>:<span class="op">-</span><span class="dv">1</span>]}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="cell-33" class="cell" data-execution_count="147">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>id_df <span class="op">=</span> pd.DataFrame(ids)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>ID <span class="op">=</span> id_df.<span class="bu">any</span>(axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>Abalone_no_out <span class="op">=</span> Abalone.loc[<span class="op">~</span>ID,:]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="cell-34" class="cell" data-execution_count="148">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> sns.boxplot(Abalone_no_out.iloc[:,<span class="dv">1</span>:<span class="op">-</span><span class="dv">1</span>].melt(), x<span class="op">=</span><span class="st">"value"</span>, hue<span class="op">=</span><span class="st">"variable"</span>)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>ax.set_xscale(<span class="st">"log"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="TP3_Data_Preprocessing_sol_files/figure-html/cell-17-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="cell-35" class="cell" data-execution_count="149">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>Abalone_no_out.iloc[:,<span class="dv">1</span>:].corr().style.background_gradient()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="149">
+<style type="text/css">
+#T_37319_row0_col0, #T_37319_row1_col1, #T_37319_row2_col2, #T_37319_row3_col3, #T_37319_row4_col4, #T_37319_row5_col5, #T_37319_row6_col6, #T_37319_row7_col7 {
+  background-color: #023858;
+  color: #f1f1f1;
+}
+#T_37319_row0_col1 {
+  background-color: #034165;
+  color: #f1f1f1;
+}
+#T_37319_row0_col2, #T_37319_row2_col6 {
+  background-color: #0872b1;
+  color: #f1f1f1;
+}
+#T_37319_row0_col3, #T_37319_row1_col3, #T_37319_row3_col0 {
+  background-color: #045a8d;
+  color: #f1f1f1;
+}
+#T_37319_row0_col4, #T_37319_row4_col5 {
+  background-color: #045d92;
+  color: #f1f1f1;
+}
+#T_37319_row0_col5, #T_37319_row6_col1, #T_37319_row6_col5 {
+  background-color: #046299;
+  color: #f1f1f1;
+}
+#T_37319_row0_col6 {
+  background-color: #056aa6;
+  color: #f1f1f1;
+}
+#T_37319_row0_col7, #T_37319_row3_col7 {
+  background-color: #dad9ea;
+  color: #000000;
+}
+#T_37319_row1_col0 {
+  background-color: #023f64;
+  color: #f1f1f1;
+}
+#T_37319_row1_col2, #T_37319_row6_col2 {
+  background-color: #056fae;
+  color: #f1f1f1;
+}
+#T_37319_row1_col4 {
+  background-color: #045f95;
+  color: #f1f1f1;
+}
+#T_37319_row1_col5, #T_37319_row4_col0, #T_37319_row6_col0 {
+  background-color: #04639b;
+  color: #f1f1f1;
+}
+#T_37319_row1_col6 {
+  background-color: #0567a1;
+  color: #f1f1f1;
+}
+#T_37319_row1_col7 {
+  background-color: #d2d3e7;
+  color: #000000;
+}
+#T_37319_row2_col0 {
+  background-color: #056caa;
+  color: #f1f1f1;
+}
+#T_37319_row2_col1, #T_37319_row2_col3 {
+  background-color: #056ba9;
+  color: #f1f1f1;
+}
+#T_37319_row2_col4 {
+  background-color: #0c74b2;
+  color: #f1f1f1;
+}
+#T_37319_row2_col5, #T_37319_row3_col2 {
+  background-color: #0771b1;
+  color: #f1f1f1;
+}
+#T_37319_row2_col7 {
+  background-color: #bdc8e1;
+  color: #000000;
+}
+#T_37319_row3_col1 {
+  background-color: #045b8e;
+  color: #f1f1f1;
+}
+#T_37319_row3_col4 {
+  background-color: #03466e;
+  color: #f1f1f1;
+}
+#T_37319_row3_col5, #T_37319_row4_col3 {
+  background-color: #034a74;
+  color: #f1f1f1;
+}
+#T_37319_row3_col6 {
+  background-color: #045585;
+  color: #f1f1f1;
+}
+#T_37319_row4_col1, #T_37319_row5_col1 {
+  background-color: #0567a2;
+  color: #f1f1f1;
+}
+#T_37319_row4_col2 {
+  background-color: #3b92c1;
+  color: #f1f1f1;
+}
+#T_37319_row4_col6 {
+  background-color: #1379b5;
+  color: #f1f1f1;
+}
+#T_37319_row4_col7, #T_37319_row7_col0, #T_37319_row7_col1, #T_37319_row7_col2, #T_37319_row7_col3, #T_37319_row7_col4, #T_37319_row7_col5, #T_37319_row7_col6 {
+  background-color: #fff7fb;
+  color: #000000;
+}
+#T_37319_row5_col0 {
+  background-color: #04649d;
+  color: #f1f1f1;
+}
+#T_37319_row5_col2 {
+  background-color: #1e80b8;
+  color: #f1f1f1;
+}
+#T_37319_row5_col3 {
+  background-color: #034b76;
+  color: #f1f1f1;
+}
+#T_37319_row5_col4 {
+  background-color: #04598c;
+  color: #f1f1f1;
+}
+#T_37319_row5_col6 {
+  background-color: #056ba7;
+  color: #f1f1f1;
+}
+#T_37319_row5_col7 {
+  background-color: #e8e4f0;
+  color: #000000;
+}
+#T_37319_row6_col3 {
+  background-color: #034f7d;
+  color: #f1f1f1;
+}
+#T_37319_row6_col4 {
+  background-color: #04649e;
+  color: #f1f1f1;
+}
+#T_37319_row6_col7 {
+  background-color: #afc1dd;
+  color: #000000;
+}
+</style>
+
+<table id="T_37319" class="caption-top table table-sm table-striped small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th class="blank level0" data-quarto-table-cell-role="th">&nbsp;</th>
+<th id="T_37319_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">LongestShell</th>
+<th id="T_37319_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Diameter</th>
+<th id="T_37319_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">Height</th>
+<th id="T_37319_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">WholeWeight</th>
+<th id="T_37319_level0_col4" class="col_heading level0 col4" data-quarto-table-cell-role="th">ShuckedWeight</th>
+<th id="T_37319_level0_col5" class="col_heading level0 col5" data-quarto-table-cell-role="th">VisceraWeight</th>
+<th id="T_37319_level0_col6" class="col_heading level0 col6" data-quarto-table-cell-role="th">ShellWeight</th>
+<th id="T_37319_level0_col7" class="col_heading level0 col7" data-quarto-table-cell-role="th">Rings</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td id="T_37319_level0_row0" class="row_heading level0 row0" data-quarto-table-cell-role="th">LongestShell</td>
+<td id="T_37319_row0_col0" class="data row0 col0">1.000000</td>
+<td id="T_37319_row0_col1" class="data row0 col1">0.985572</td>
+<td id="T_37319_row0_col2" class="data row0 col2">0.890340</td>
+<td id="T_37319_row0_col3" class="data row0 col3">0.939734</td>
+<td id="T_37319_row0_col4" class="data row0 col4">0.913838</td>
+<td id="T_37319_row0_col5" class="data row0 col5">0.911613</td>
+<td id="T_37319_row0_col6" class="data row0 col6">0.914868</td>
+<td id="T_37319_row0_col7" class="data row0 col7">0.518270</td>
+</tr>
+<tr class="even">
+<td id="T_37319_level0_row1" class="row_heading level0 row1" data-quarto-table-cell-role="th">Diameter</td>
+<td id="T_37319_row1_col0" class="data row1 col0">0.985572</td>
+<td id="T_37319_row1_col1" class="data row1 col1">1.000000</td>
+<td id="T_37319_row1_col2" class="data row1 col2">0.896929</td>
+<td id="T_37319_row1_col3" class="data row1 col3">0.938773</td>
+<td id="T_37319_row1_col4" class="data row1 col4">0.907438</td>
+<td id="T_37319_row1_col5" class="data row1 col5">0.906869</td>
+<td id="T_37319_row1_col6" class="data row1 col6">0.922238</td>
+<td id="T_37319_row1_col7" class="data row1 col7">0.538970</td>
+</tr>
+<tr class="odd">
+<td id="T_37319_level0_row2" class="row_heading level0 row2" data-quarto-table-cell-role="th">Height</td>
+<td id="T_37319_row2_col0" class="data row2 col0">0.890340</td>
+<td id="T_37319_row2_col1" class="data row2 col1">0.896929</td>
+<td id="T_37319_row2_col2" class="data row2 col2">1.000000</td>
+<td id="T_37319_row2_col3" class="data row2 col3">0.892057</td>
+<td id="T_37319_row2_col4" class="data row2 col4">0.838584</td>
+<td id="T_37319_row2_col5" class="data row2 col5">0.868008</td>
+<td id="T_37319_row2_col6" class="data row2 col6">0.897948</td>
+<td id="T_37319_row2_col7" class="data row2 col7">0.580034</td>
+</tr>
+<tr class="even">
+<td id="T_37319_level0_row3" class="row_heading level0 row3" data-quarto-table-cell-role="th">WholeWeight</td>
+<td id="T_37319_row3_col0" class="data row3 col0">0.939734</td>
+<td id="T_37319_row3_col1" class="data row3 col1">0.938773</td>
+<td id="T_37319_row3_col2" class="data row3 col2">0.892057</td>
+<td id="T_37319_row3_col3" class="data row3 col3">1.000000</td>
+<td id="T_37319_row3_col4" class="data row3 col4">0.967967</td>
+<td id="T_37319_row3_col5" class="data row3 col5">0.964607</td>
+<td id="T_37319_row3_col6" class="data row3 col6">0.958228</td>
+<td id="T_37319_row3_col7" class="data row3 col7">0.518124</td>
+</tr>
+<tr class="odd">
+<td id="T_37319_level0_row4" class="row_heading level0 row4" data-quarto-table-cell-role="th">ShuckedWeight</td>
+<td id="T_37319_row4_col0" class="data row4 col0">0.913838</td>
+<td id="T_37319_row4_col1" class="data row4 col1">0.907438</td>
+<td id="T_37319_row4_col2" class="data row4 col2">0.838584</td>
+<td id="T_37319_row4_col3" class="data row4 col3">0.967967</td>
+<td id="T_37319_row4_col4" class="data row4 col4">1.000000</td>
+<td id="T_37319_row4_col5" class="data row4 col5">0.926482</td>
+<td id="T_37319_row4_col6" class="data row4 col6">0.886376</td>
+<td id="T_37319_row4_col7" class="data row4 col7">0.393985</td>
+</tr>
+<tr class="even">
+<td id="T_37319_level0_row5" class="row_heading level0 row5" data-quarto-table-cell-role="th">VisceraWeight</td>
+<td id="T_37319_row5_col0" class="data row5 col0">0.911613</td>
+<td id="T_37319_row5_col1" class="data row5 col1">0.906869</td>
+<td id="T_37319_row5_col2" class="data row5 col2">0.868008</td>
+<td id="T_37319_row5_col3" class="data row5 col3">0.964607</td>
+<td id="T_37319_row5_col4" class="data row5 col4">0.926482</td>
+<td id="T_37319_row5_col5" class="data row5 col5">1.000000</td>
+<td id="T_37319_row5_col6" class="data row5 col6">0.912466</td>
+<td id="T_37319_row5_col7" class="data row5 col7">0.480864</td>
+</tr>
+<tr class="odd">
+<td id="T_37319_level0_row6" class="row_heading level0 row6" data-quarto-table-cell-role="th">ShellWeight</td>
+<td id="T_37319_row6_col0" class="data row6 col0">0.914868</td>
+<td id="T_37319_row6_col1" class="data row6 col1">0.922238</td>
+<td id="T_37319_row6_col2" class="data row6 col2">0.897948</td>
+<td id="T_37319_row6_col3" class="data row6 col3">0.958228</td>
+<td id="T_37319_row6_col4" class="data row6 col4">0.886376</td>
+<td id="T_37319_row6_col5" class="data row6 col5">0.912466</td>
+<td id="T_37319_row6_col6" class="data row6 col6">1.000000</td>
+<td id="T_37319_row6_col7" class="data row6 col7">0.606772</td>
+</tr>
+<tr class="even">
+<td id="T_37319_level0_row7" class="row_heading level0 row7" data-quarto-table-cell-role="th">Rings</td>
+<td id="T_37319_row7_col0" class="data row7 col0">0.518270</td>
+<td id="T_37319_row7_col1" class="data row7 col1">0.538970</td>
+<td id="T_37319_row7_col2" class="data row7 col2">0.580034</td>
+<td id="T_37319_row7_col3" class="data row7 col3">0.518124</td>
+<td id="T_37319_row7_col4" class="data row7 col4">0.393985</td>
+<td id="T_37319_row7_col5" class="data row7 col5">0.480864</td>
+<td id="T_37319_row7_col6" class="data row7 col6">0.606772</td>
+<td id="T_37319_row7_col7" class="data row7 col7">1.000000</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<blockquote class="blockquote">
+<p><strong>Remark:</strong> This is not an ideal way to do! Removing outliers is just like removing missing values, it can influence other columns in the data. You should pay attention to this influence when dealing with outliers. Moreover, in modeling sense, outliers are points with <code>strage</code> target values. In this case, handling missing values depend on the target.</p>
+</blockquote>
+<ul>
+<li>Detecting high leverage points</li>
+</ul>
+<p><a href="https://online.stat.psu.edu/stat462/node/170/">A data point has high leverage if it has “extreme” predictor <span class="math inline">\(x\)</span> values. With a single predictor, an extreme <span class="math inline">\(x\)</span> value is simply one that is particularly high or low. With multiple predictors, extreme <span class="math inline">\(x\)</span> values may be particularly high or low for one or more predictors, or may be “unusual” combinations of predictor values (e.g., with two predictors that are positively correlated, an unusual combination of predictor values might be a high value of one predictor paired with a low value of the other predictor).</a></p>
+<p>To hunt high leverage points, we need hat matrix and leverage values as follow.</p>
+<div id="cell-38" class="cell" data-execution_count="150">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statsmodels.api <span class="im">as</span> sm</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> sm.add_constant(Abalone.iloc[:,<span class="dv">1</span>:<span class="op">-</span><span class="dv">1</span>])   <span class="co"># Adds the intercept term</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> Abalone.Rings</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> sm.OLS(y, X).fit()</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>influence <span class="op">=</span> model.get_influence()</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>leverage <span class="op">=</span> influence.hat_matrix_diag</span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>cooks <span class="op">=</span> influence.cooks_distance[<span class="dv">0</span>]</span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>values <span class="op">=</span> {<span class="st">'Leverage'</span>: leverage, <span class="st">'Cooks Distance'</span>: cooks}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="cell-39" class="cell" data-execution_count="151">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>sns.scatterplot(x<span class="op">=</span>leverage, y<span class="op">=</span>model.resid, size<span class="op">=</span>cooks, legend<span class="op">=</span><span class="va">False</span>, sizes<span class="op">=</span>(<span class="dv">20</span>, <span class="dv">200</span>))</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Leverage'</span>)</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Residuals'</span>)</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Leverage vs. Residuals'</span>)</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>plt.axhline(<span class="dv">0</span>, color<span class="op">=</span><span class="st">'red'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>, linewidth<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="TP3_Data_Preprocessing_sol_files/figure-html/cell-20-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<blockquote class="blockquote">
+<p>This plot indicates that there are some high leverage points (deviate away from the mean of input) with large negative residuals (not well predicted by the model). This high-leverage points are concerning because it has weird input and output values.</p>
+</blockquote>
+<div id="cell-41" class="cell" data-execution_count="152">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>threshold <span class="op">=</span> <span class="dv">3</span> <span class="op">*</span> (X.shape[<span class="dv">1</span>]) <span class="op">/</span> <span class="bu">len</span>(X)   <span class="co"># threshold that separates high leverage points</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>high_leverage_points <span class="op">=</span> np.where(leverage <span class="op">&gt;</span> threshold)[<span class="dv">0</span>]</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>high_lev_df <span class="op">=</span> Abalone.iloc[high_leverage_points]</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>low_lev_df <span class="op">=</span> Abalone.iloc[<span class="op">~</span>high_leverage_points]</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>low_lev_df.iloc[:,<span class="dv">1</span>:].corr().style.background_gradient()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="152">
+<style type="text/css">
+#T_9e74a_row0_col0, #T_9e74a_row1_col1, #T_9e74a_row2_col2, #T_9e74a_row3_col3, #T_9e74a_row4_col4, #T_9e74a_row5_col5, #T_9e74a_row6_col6, #T_9e74a_row7_col7 {
+  background-color: #023858;
+  color: #f1f1f1;
+}
+#T_9e74a_row0_col1, #T_9e74a_row1_col0 {
+  background-color: #034369;
+  color: #f1f1f1;
+}
+#T_9e74a_row0_col2, #T_9e74a_row5_col0 {
+  background-color: #187cb6;
+  color: #f1f1f1;
+}
+#T_9e74a_row0_col3 {
+  background-color: #04649d;
+  color: #f1f1f1;
+}
+#T_9e74a_row0_col4 {
+  background-color: #0569a5;
+  color: #f1f1f1;
+}
+#T_9e74a_row0_col5, #T_9e74a_row0_col6, #T_9e74a_row2_col0 {
+  background-color: #0872b1;
+  color: #f1f1f1;
+}
+#T_9e74a_row0_col7 {
+  background-color: #d2d3e7;
+  color: #000000;
+}
+#T_9e74a_row1_col2 {
+  background-color: #0d75b3;
+  color: #f1f1f1;
+}
+#T_9e74a_row1_col3 {
+  background-color: #04629a;
+  color: #f1f1f1;
+}
+#T_9e74a_row1_col4 {
+  background-color: #056aa6;
+  color: #f1f1f1;
+}
+#T_9e74a_row1_col5 {
+  background-color: #0f76b3;
+  color: #f1f1f1;
+}
+#T_9e74a_row1_col6 {
+  background-color: #056caa;
+  color: #f1f1f1;
+}
+#T_9e74a_row1_col7 {
+  background-color: #c6cce3;
+  color: #000000;
+}
+#T_9e74a_row2_col1, #T_9e74a_row6_col0 {
+  background-color: #0570b0;
+  color: #f1f1f1;
+}
+#T_9e74a_row2_col3 {
+  background-color: #1c7fb8;
+  color: #f1f1f1;
+}
+#T_9e74a_row2_col4 {
+  background-color: #328dbf;
+  color: #f1f1f1;
+}
+#T_9e74a_row2_col5 {
+  background-color: #348ebf;
+  color: #f1f1f1;
+}
+#T_9e74a_row2_col6 {
+  background-color: #167bb6;
+  color: #f1f1f1;
+}
+#T_9e74a_row2_col7 {
+  background-color: #b4c4df;
+  color: #000000;
+}
+#T_9e74a_row3_col0 {
+  background-color: #0567a1;
+  color: #f1f1f1;
+}
+#T_9e74a_row3_col1 {
+  background-color: #0567a2;
+  color: #f1f1f1;
+}
+#T_9e74a_row3_col2 {
+  background-color: #3991c1;
+  color: #f1f1f1;
+}
+#T_9e74a_row3_col4 {
+  background-color: #034973;
+  color: #f1f1f1;
+}
+#T_9e74a_row3_col5 {
+  background-color: #034f7d;
+  color: #f1f1f1;
+}
+#T_9e74a_row3_col6 {
+  background-color: #045b8f;
+  color: #f1f1f1;
+}
+#T_9e74a_row3_col7 {
+  background-color: #e0deed;
+  color: #000000;
+}
+#T_9e74a_row4_col0 {
+  background-color: #1077b4;
+  color: #f1f1f1;
+}
+#T_9e74a_row4_col1 {
+  background-color: #197db7;
+  color: #f1f1f1;
+}
+#T_9e74a_row4_col2 {
+  background-color: #86b0d3;
+  color: #000000;
+}
+#T_9e74a_row4_col3 {
+  background-color: #034c78;
+  color: #f1f1f1;
+}
+#T_9e74a_row4_col5 {
+  background-color: #04639b;
+  color: #f1f1f1;
+}
+#T_9e74a_row4_col6 {
+  background-color: #2a88bc;
+  color: #f1f1f1;
+}
+#T_9e74a_row4_col7, #T_9e74a_row7_col0, #T_9e74a_row7_col1, #T_9e74a_row7_col2, #T_9e74a_row7_col3, #T_9e74a_row7_col4, #T_9e74a_row7_col5, #T_9e74a_row7_col6 {
+  background-color: #fff7fb;
+  color: #000000;
+}
+#T_9e74a_row5_col1 {
+  background-color: #2685bb;
+  color: #f1f1f1;
+}
+#T_9e74a_row5_col2 {
+  background-color: #6fa7ce;
+  color: #f1f1f1;
+}
+#T_9e74a_row5_col3 {
+  background-color: #045280;
+  color: #f1f1f1;
+}
+#T_9e74a_row5_col4 {
+  background-color: #045f95;
+  color: #f1f1f1;
+}
+#T_9e74a_row5_col6 {
+  background-color: #157ab5;
+  color: #f1f1f1;
+}
+#T_9e74a_row5_col7 {
+  background-color: #eee8f3;
+  color: #000000;
+}
+#T_9e74a_row6_col1 {
+  background-color: #056dac;
+  color: #f1f1f1;
+}
+#T_9e74a_row6_col2 {
+  background-color: #2484ba;
+  color: #f1f1f1;
+}
+#T_9e74a_row6_col3 {
+  background-color: #04588a;
+  color: #f1f1f1;
+}
+#T_9e74a_row6_col4 {
+  background-color: #0771b1;
+  color: #f1f1f1;
+}
+#T_9e74a_row6_col5 {
+  background-color: #056fae;
+  color: #f1f1f1;
+}
+#T_9e74a_row6_col7 {
+  background-color: #ced0e6;
+  color: #000000;
+}
+</style>
+
+<table id="T_9e74a" class="caption-top table table-sm table-striped small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th class="blank level0" data-quarto-table-cell-role="th">&nbsp;</th>
+<th id="T_9e74a_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">LongestShell</th>
+<th id="T_9e74a_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Diameter</th>
+<th id="T_9e74a_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">Height</th>
+<th id="T_9e74a_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">WholeWeight</th>
+<th id="T_9e74a_level0_col4" class="col_heading level0 col4" data-quarto-table-cell-role="th">ShuckedWeight</th>
+<th id="T_9e74a_level0_col5" class="col_heading level0 col5" data-quarto-table-cell-role="th">VisceraWeight</th>
+<th id="T_9e74a_level0_col6" class="col_heading level0 col6" data-quarto-table-cell-role="th">ShellWeight</th>
+<th id="T_9e74a_level0_col7" class="col_heading level0 col7" data-quarto-table-cell-role="th">Rings</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td id="T_9e74a_level0_row0" class="row_heading level0 row0" data-quarto-table-cell-role="th">LongestShell</td>
+<td id="T_9e74a_row0_col0" class="data row0 col0">1.000000</td>
+<td id="T_9e74a_row0_col1" class="data row0 col1">0.983796</td>
+<td id="T_9e74a_row0_col2" class="data row0 col2">0.895052</td>
+<td id="T_9e74a_row0_col3" class="data row0 col3">0.920812</td>
+<td id="T_9e74a_row0_col4" class="data row0 col4">0.887464</td>
+<td id="T_9e74a_row0_col5" class="data row0 col5">0.879698</td>
+<td id="T_9e74a_row0_col6" class="data row0 col6">0.898355</td>
+<td id="T_9e74a_row0_col7" class="data row0 col7">0.598223</td>
+</tr>
+<tr class="even">
+<td id="T_9e74a_level0_row1" class="row_heading level0 row1" data-quarto-table-cell-role="th">Diameter</td>
+<td id="T_9e74a_row1_col0" class="data row1 col0">0.983796</td>
+<td id="T_9e74a_row1_col1" class="data row1 col1">1.000000</td>
+<td id="T_9e74a_row1_col2" class="data row1 col2">0.904749</td>
+<td id="T_9e74a_row1_col3" class="data row1 col3">0.924017</td>
+<td id="T_9e74a_row1_col4" class="data row1 col4">0.885534</td>
+<td id="T_9e74a_row1_col5" class="data row1 col5">0.872586</td>
+<td id="T_9e74a_row1_col6" class="data row1 col6">0.910550</td>
+<td id="T_9e74a_row1_col7" class="data row1 col7">0.619908</td>
+</tr>
+<tr class="odd">
+<td id="T_9e74a_level0_row2" class="row_heading level0 row2" data-quarto-table-cell-role="th">Height</td>
+<td id="T_9e74a_row2_col0" class="data row2 col0">0.895052</td>
+<td id="T_9e74a_row2_col1" class="data row2 col1">0.904749</td>
+<td id="T_9e74a_row2_col2" class="data row2 col2">1.000000</td>
+<td id="T_9e74a_row2_col3" class="data row2 col3">0.866042</td>
+<td id="T_9e74a_row2_col4" class="data row2 col4">0.807687</td>
+<td id="T_9e74a_row2_col5" class="data row2 col5">0.827685</td>
+<td id="T_9e74a_row2_col6" class="data row2 col6">0.884090</td>
+<td id="T_9e74a_row2_col7" class="data row2 col7">0.648165</td>
+</tr>
+<tr class="even">
+<td id="T_9e74a_level0_row3" class="row_heading level0 row3" data-quarto-table-cell-role="th">WholeWeight</td>
+<td id="T_9e74a_row3_col0" class="data row3 col0">0.920812</td>
+<td id="T_9e74a_row3_col1" class="data row3 col1">0.924017</td>
+<td id="T_9e74a_row3_col2" class="data row3 col2">0.866042</td>
+<td id="T_9e74a_row3_col3" class="data row3 col3">1.000000</td>
+<td id="T_9e74a_row3_col4" class="data row3 col4">0.966727</td>
+<td id="T_9e74a_row3_col5" class="data row3 col5">0.958884</td>
+<td id="T_9e74a_row3_col6" class="data row3 col6">0.947852</td>
+<td id="T_9e74a_row3_col7" class="data row3 col7">0.567011</td>
+</tr>
+<tr class="odd">
+<td id="T_9e74a_level0_row4" class="row_heading level0 row4" data-quarto-table-cell-role="th">ShuckedWeight</td>
+<td id="T_9e74a_row4_col0" class="data row4 col0">0.887464</td>
+<td id="T_9e74a_row4_col1" class="data row4 col1">0.885534</td>
+<td id="T_9e74a_row4_col2" class="data row4 col2">0.807687</td>
+<td id="T_9e74a_row4_col3" class="data row4 col3">0.966727</td>
+<td id="T_9e74a_row4_col4" class="data row4 col4">1.000000</td>
+<td id="T_9e74a_row4_col5" class="data row4 col5">0.917582</td>
+<td id="T_9e74a_row4_col6" class="data row4 col6">0.865314</td>
+<td id="T_9e74a_row4_col7" class="data row4 col7">0.472378</td>
+</tr>
+<tr class="even">
+<td id="T_9e74a_level0_row5" class="row_heading level0 row5" data-quarto-table-cell-role="th">VisceraWeight</td>
+<td id="T_9e74a_row5_col0" class="data row5 col0">0.879698</td>
+<td id="T_9e74a_row5_col1" class="data row5 col1">0.872586</td>
+<td id="T_9e74a_row5_col2" class="data row5 col2">0.827685</td>
+<td id="T_9e74a_row5_col3" class="data row5 col3">0.958884</td>
+<td id="T_9e74a_row5_col4" class="data row5 col4">0.917582</td>
+<td id="T_9e74a_row5_col5" class="data row5 col5">1.000000</td>
+<td id="T_9e74a_row5_col6" class="data row5 col6">0.886303</td>
+<td id="T_9e74a_row5_col7" class="data row5 col7">0.534098</td>
+</tr>
+<tr class="odd">
+<td id="T_9e74a_level0_row6" class="row_heading level0 row6" data-quarto-table-cell-role="th">ShellWeight</td>
+<td id="T_9e74a_row6_col0" class="data row6 col0">0.898355</td>
+<td id="T_9e74a_row6_col1" class="data row6 col1">0.910550</td>
+<td id="T_9e74a_row6_col2" class="data row6 col2">0.884090</td>
+<td id="T_9e74a_row6_col3" class="data row6 col3">0.947852</td>
+<td id="T_9e74a_row6_col4" class="data row6 col4">0.865314</td>
+<td id="T_9e74a_row6_col5" class="data row6 col5">0.886303</td>
+<td id="T_9e74a_row6_col6" class="data row6 col6">1.000000</td>
+<td id="T_9e74a_row6_col7" class="data row6 col7">0.608338</td>
+</tr>
+<tr class="even">
+<td id="T_9e74a_level0_row7" class="row_heading level0 row7" data-quarto-table-cell-role="th">Rings</td>
+<td id="T_9e74a_row7_col0" class="data row7 col0">0.598223</td>
+<td id="T_9e74a_row7_col1" class="data row7 col1">0.619908</td>
+<td id="T_9e74a_row7_col2" class="data row7 col2">0.648165</td>
+<td id="T_9e74a_row7_col3" class="data row7 col3">0.567011</td>
+<td id="T_9e74a_row7_col4" class="data row7 col4">0.472378</td>
+<td id="T_9e74a_row7_col5" class="data row7 col5">0.534098</td>
+<td id="T_9e74a_row7_col6" class="data row7 col6">0.608338</td>
+<td id="T_9e74a_row7_col7" class="data row7 col7">1.000000</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="further-readings" class="level1">
+<h1>Further Readings</h1>
+<ul>
+<li><a href="https://online.stat.psu.edu/stat501/lesson/11/11.1#:~:text=A%20data%20point%20has%20high,is%20particularly%20high%20or%20low.">Outliers &amp; high leverage observations</a></li>
+<li><a href="https://online.stat.psu.edu/stat501/lesson/11/11.2">Using Leverages to Help Identify Extreme x Values, STAT 501</a></li>
+<li><a href="https://online.stat.psu.edu/stat501/lesson/11/11.3">Identifying Outliers (Unusual y Values), STAT 501</a></li>
+<li><a href="https://www.scribbr.com/statistics/missing-data/">Missing data: types, explanation, Imputation</a></li>
+<li><a href="https://www.kaggle.com/datasets/rodolfomendes/abalone-dataset">Kaggle: Abalone dataset</a></li>
+<li><a href="https://www.stat.berkeley.edu/~rabbee/s154/ISLR_First_Printing.pdf">Chapet 3, section 3.3.3 of The Introduction to Statistical Learning</a></li>
+</ul>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
