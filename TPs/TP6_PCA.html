@@ -277,8 +277,8 @@ window.Quarto = {
 <ul>
 <li>Show that <span class="math inline">\(\vec{u}_k\)</span> is the <span class="math inline">\(k\)</span> th eigenvector of matrix <span class="math inline">\(X^TX\)</span> corresponding to its <span class="math inline">\(k\)</span> th largest eigenvalue <span class="math inline">\(\lambda_k\leq\lambda_{k-1}\leq\dots\leq \lambda_1\)</span>.</li>
 </ul>
-<p><strong>C.</strong> Show that the matrix <span class="math inline">\(\widehat{X}_k=\sum_{j=1}^kX\vec{u}_j\vec{u}_j^T\)</span> is the best <a href="https://en.wikipedia.org/wiki/Low-rank_approximation">low-rank approximation</a> of the original data <span class="math inline">\(X\)</span> w.r.t <a href="https://en.wikipedia.org/wiki/Frobenius_norm">Frobenius norm</a>, i.e.,</p>
-<p><span class="math display">\[\widehat{X}_k=\arg\min_{W:\text{rank}(W)\leq k}\|X-W\|_{F}=\arg\min_{W:\text{rank}(W)\leq k}\sqrt{\sum_{j=k+1}^d\lambda_j^2(X-W)}.\]</span></p>
+<p><strong>C.</strong> Show that the matrix <span class="math inline">\(\tilde{X}_k=\sum_{j=1}^k\lambda_j\vec{u}_j\vec{u}_j^T\)</span> is the best <a href="https://en.wikipedia.org/wiki/Low-rank_approximation">low-rank approximation</a> of the original data <span class="math inline">\(X\)</span> w.r.t <a href="https://en.wikipedia.org/wiki/Frobenius_norm">Frobenius norm</a>, i.e.,</p>
+<p><span class="math display">\[\tilde{X}_k=\arg\min_{W:\text{rank}(W)\leq k}\|X-W\|_{F}=\arg\min_{W:\text{rank}(W)\leq k}\sqrt{\sum_{j=k+1}^d\lambda_j^2(X-W)}.\]</span></p>
 </section>
 <section id="further-readings" class="level1">
 <h1>Further Readings</h1>
