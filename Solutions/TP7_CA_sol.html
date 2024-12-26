@@ -1,0 +1,1305 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.56">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>TP7 - Corresponding Analysis (CA)</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="TP7_CA_sol_files/libs/clipboard/clipboard.min.js"></script>
+<script src="TP7_CA_sol_files/libs/quarto-html/quarto.js"></script>
+<script src="TP7_CA_sol_files/libs/quarto-html/popper.min.js"></script>
+<script src="TP7_CA_sol_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="TP7_CA_sol_files/libs/quarto-html/anchor.min.js"></script>
+<link href="TP7_CA_sol_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="TP7_CA_sol_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="TP7_CA_sol_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="TP7_CA_sol_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="TP7_CA_sol_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><strong>TP7 - Corresponding Analysis (CA)</strong></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p><b>Exploratory Data Analysis &amp; Unsuperivsed Learning </b><br> <strong>Course: PHAUK Sokkey, PhD</strong> <br> <strong>TP: HAS Sothea, PhD</strong></p>
+<hr>
+<p><strong>Objective</strong>: Qualitative columns are often ignored in predictive models or analysis. It is important to notice that qualitative variables are as important as the quantitative ones when it comes to building predictive models or analyzing their connection within the dataset. In this TP, we will focus on identifying the associations between two qualitative variables.</p>
+<hr>
+<blockquote class="blockquote">
+<p><strong>The <code>Jupyter Notebook</code> for this TP can be downloaded here: <a href="https://hassothea.github.io/EDA_ITC/TPs/TP7_CA.ipynb">TP7_CA.ipynb</a></strong>.</p>
+</blockquote>
+<hr>
+<section id="data-loading-and-preprocessing" class="level2">
+<h2 class="anchored" data-anchor-id="data-loading-and-preprocessing">1. Data loading and Preprocessing</h2>
+<p><code>Titanic</code> dataset contains information on the passengers aboard the RMS Titanic, which sank in 1912. It includes details like age, gender, class, and survival status.</p>
+<p><strong>A.</strong> Import the <code>Titanic</code> dataset from kaggle using: <a href="https://www.kaggle.com/datasets/surendhan/titanic-dataset">Titanic dataset</a>.</p>
+<ul>
+<li>How many quantitative and qualitative variables are there in this dataset?</li>
+<li>Convert each column into its correct data type.</li>
+</ul>
+<div id="cell-4" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> kagglehub</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Download latest version</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>path <span class="op">=</span> kagglehub.dataset_download(<span class="st">"surendhan/titanic-dataset"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="cell-5" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Import data</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pd.read_csv(path <span class="op">+</span> <span class="st">"/titanic.csv"</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>data.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="3">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">PassengerId</th>
+<th data-quarto-table-cell-role="th">Survived</th>
+<th data-quarto-table-cell-role="th">Pclass</th>
+<th data-quarto-table-cell-role="th">Name</th>
+<th data-quarto-table-cell-role="th">Sex</th>
+<th data-quarto-table-cell-role="th">Age</th>
+<th data-quarto-table-cell-role="th">SibSp</th>
+<th data-quarto-table-cell-role="th">Parch</th>
+<th data-quarto-table-cell-role="th">Ticket</th>
+<th data-quarto-table-cell-role="th">Fare</th>
+<th data-quarto-table-cell-role="th">Cabin</th>
+<th data-quarto-table-cell-role="th">Embarked</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>892</td>
+<td>0</td>
+<td>3</td>
+<td>Kelly, Mr. James</td>
+<td>male</td>
+<td>34.5</td>
+<td>0</td>
+<td>0</td>
+<td>330911</td>
+<td>7.8292</td>
+<td>NaN</td>
+<td>Q</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>893</td>
+<td>1</td>
+<td>3</td>
+<td>Wilkes, Mrs. James (Ellen Needs)</td>
+<td>female</td>
+<td>47.0</td>
+<td>1</td>
+<td>0</td>
+<td>363272</td>
+<td>7.0000</td>
+<td>NaN</td>
+<td>S</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>894</td>
+<td>0</td>
+<td>2</td>
+<td>Myles, Mr. Thomas Francis</td>
+<td>male</td>
+<td>62.0</td>
+<td>0</td>
+<td>0</td>
+<td>240276</td>
+<td>9.6875</td>
+<td>NaN</td>
+<td>Q</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>895</td>
+<td>0</td>
+<td>3</td>
+<td>Wirz, Mr. Albert</td>
+<td>male</td>
+<td>27.0</td>
+<td>0</td>
+<td>0</td>
+<td>315154</td>
+<td>8.6625</td>
+<td>NaN</td>
+<td>S</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>896</td>
+<td>1</td>
+<td>3</td>
+<td>Hirvonen, Mrs. Alexander (Helga E Lindqvist)</td>
+<td>female</td>
+<td>22.0</td>
+<td>1</td>
+<td>1</td>
+<td>3101298</td>
+<td>12.2875</td>
+<td>NaN</td>
+<td>S</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div id="cell-6" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>data.dtypes</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="4">
+<pre><code>PassengerId      int64
+Survived         int64
+Pclass           int64
+Name            object
+Sex             object
+Age            float64
+SibSp            int64
+Parch            int64
+Ticket          object
+Fare           float64
+Cabin           object
+Embarked        object
+dtype: object</code></pre>
+</div>
+</div>
+<blockquote class="blockquote">
+<p><code>Survived</code> and <code>Pclass</code> should be considered categorical. Let’s convert them.</p>
+</blockquote>
+<div id="cell-8" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>data[<span class="st">'Survived'</span>] <span class="op">=</span> data.loc[:,<span class="st">'Survived'</span>].astype(<span class="bu">object</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>data[<span class="st">'Pclass'</span>] <span class="op">=</span> data.loc[:,<span class="st">'Pclass'</span>].astype(<span class="bu">object</span>)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> data.drop(columns<span class="op">=</span>[<span class="st">'PassengerId'</span>])</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Quantitative columns: </span><span class="sc">{</span>data<span class="sc">.</span>select_dtypes(include<span class="op">=</span><span class="st">"number"</span>)<span class="sc">.</span>columns<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Qualitative columns: </span><span class="sc">{</span>data<span class="sc">.</span>select_dtypes(include<span class="op">=</span><span class="st">"object"</span>)<span class="sc">.</span>columns<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Quantitative columns: Index(['Age', 'SibSp', 'Parch', 'Fare'], dtype='object')
+Qualitative columns: Index(['Survived', 'Pclass', 'Name', 'Sex', 'Ticket', 'Cabin', 'Embarked'], dtype='object')</code></pre>
+</div>
+</div>
+<p><strong>B.</strong> Are there any missing values? If so,</p>
+<ul>
+<li>Study the impact of missing value removal on the quantitative variables.</li>
+<li>Study the impact of missing value removal on the qualitative variables.</li>
+<li>Conclude the dynamic of the missing values and handle them.</li>
+<li>Remove redundant observations if there is any.</li>
+</ul>
+<div id="cell-10" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>data.isna().<span class="bu">sum</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="6">
+<pre><code>Survived      0
+Pclass        0
+Name          0
+Sex           0
+Age          86
+SibSp         0
+Parch         0
+Ticket        0
+Fare          1
+Cabin       327
+Embarked      0
+dtype: int64</code></pre>
+</div>
+</div>
+<ul>
+<li>For column ‘Fare’, there is only one missing value. Therefore, we can simply drop it or impute it.</li>
+<li>For column ‘Cabin’, around <span class="math inline">\(80\%\)</span> of this column are missing values. It is not helpful to try to impute or remove the rows with missing values. Threfore, we simply drop this column.</li>
+<li>The main column to be studied is ‘Age’. Therefore, we will study the impact of missing value removal from this column.</li>
+</ul>
+<div id="cell-12" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.impute <span class="im">import</span> SimpleImputer</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> data.drop(columns<span class="op">=</span>[<span class="st">'Cabin'</span>])</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>sip <span class="op">=</span> SimpleImputer(strategy<span class="op">=</span><span class="st">'mean'</span>)</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>data[<span class="st">'Fare'</span>] <span class="op">=</span> sip.fit_transform(data[[<span class="st">'Fare'</span>]])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>Impact on numerical columns</li>
+</ul>
+<div id="cell-14" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>sns.<span class="bu">set</span>(style<span class="op">=</span><span class="st">"whitegrid"</span>)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>quant_cols <span class="op">=</span> data.select_dtypes(include<span class="op">=</span><span class="st">"number"</span>).columns</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>quant_cols</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>_, axs <span class="op">=</span> plt.subplots(<span class="dv">2</span>, <span class="dv">3</span>, figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">5</span>))</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, va <span class="kw">in</span> <span class="bu">enumerate</span>(quant_cols[<span class="dv">1</span>:]):</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>  sns.kdeplot(data<span class="op">=</span>data, x<span class="op">=</span>va, ax<span class="op">=</span>axs[<span class="dv">0</span>,i])</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>  axs[<span class="dv">0</span>,i].set_title(<span class="ss">f'Distribution of </span><span class="sc">{</span>va<span class="sc">}</span><span class="ss"> before removing NA'</span>)</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>  sns.kdeplot(data<span class="op">=</span>data.dropna(), x<span class="op">=</span>va, ax<span class="op">=</span>axs[<span class="dv">1</span>,i])</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>  axs[<span class="dv">1</span>,i].set_title(<span class="ss">f'Distribution of </span><span class="sc">{</span>va<span class="sc">}</span><span class="ss"> after removing NA'</span>)</span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="TP7_CA_sol_files/figure-html/cell-8-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li>Impact on categorical columns</li>
+</ul>
+<div id="cell-16" class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>qual_cols <span class="op">=</span> data.drop(columns<span class="op">=</span>[<span class="st">'Name'</span>, <span class="st">'Ticket'</span>]).select_dtypes(include<span class="op">=</span><span class="st">"object"</span>).columns</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>qual_cols</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>_, axs <span class="op">=</span> plt.subplots(<span class="dv">2</span>, <span class="bu">len</span>(qual_cols), figsize<span class="op">=</span>(<span class="dv">18</span>, <span class="dv">7</span>))</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, va <span class="kw">in</span> <span class="bu">enumerate</span>(qual_cols):</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  sns.countplot(data<span class="op">=</span>data, x<span class="op">=</span>va, ax<span class="op">=</span>axs[<span class="dv">0</span>,i])</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>  axs[<span class="dv">0</span>,i].set_title(<span class="ss">f'Distribution of </span><span class="sc">{</span>va<span class="sc">}</span><span class="ss"> before removing NA'</span>)</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>  axs[<span class="dv">0</span>,i].bar_label(axs[<span class="dv">0</span>,i].containers[<span class="dv">0</span>])</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>  sns.countplot(data<span class="op">=</span>data.dropna(), x<span class="op">=</span>va, ax<span class="op">=</span>axs[<span class="dv">1</span>,i])</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>  axs[<span class="dv">1</span>,i].set_title(<span class="ss">f'Distribution of </span><span class="sc">{</span>va<span class="sc">}</span><span class="ss"> after removing NA'</span>)</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>  axs[<span class="dv">1</span>,i].bar_label(axs[<span class="dv">1</span>,i].containers[<span class="dv">0</span>])</span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="TP7_CA_sol_files/figure-html/cell-9-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="chi2-test-and-ca" class="level2">
+<h2 class="anchored" data-anchor-id="chi2-test-and-ca">2. <span class="math inline">\(\chi^2\)</span>-test and CA</h2>
+<p>The chi-square test is a statistical method used to determine if there is a significant association between two categorical variables. It tests the following hypotheses: <span class="math display">\[\begin{cases}
+H_0:\text{ There is no association between the two variables (they are independent).}\\
+H_1:\text{ There is an association between the two variables (they are not independent).}
+\end{cases}\]</span> Under null hypothesis <span class="math inline">\(H_0\)</span>, <span class="math inline">\(\chi^2\)</span>-statistic defined by <span class="math inline">\(\chi^2=\sum_{i,j}\frac{(O_{ij}-E_{ij})^2}{E_{ij}}\sim\chi^2((r-1)(c-1))\)</span> where</p>
+<ul>
+<li><span class="math inline">\(r,c\)</span>: the number of categories of the 1st and 2nd variable respectively.</li>
+<li><span class="math inline">\(O_{ij}\)</span>: the observed frequency of <span class="math inline">\(i\)</span>-th and <span class="math inline">\(j\)</span>-th category of the 1st and the 2nd variable.</li>
+<li><span class="math inline">\(E_{ij}\)</span>: the expected/theoretical frequency of <span class="math inline">\(i\)</span>-th and <span class="math inline">\(j\)</span>-th category of the 1st and the 2nd variable.</li>
+</ul>
+<p><strong>A. <span class="math inline">\(\chi^2\)</span>-test for Pclass vs Embarked.</strong></p>
+<ul>
+<li>Visualize the relationship between the two variables.</li>
+<li>Compute the <span class="math inline">\(\chi^2\)</span> statistics of the pair <code>Pclass</code> and <code>Embarked</code> variable.</li>
+<li>Deduce the p-value of <span class="math inline">\(\chi^2\)</span>-test of the two variables.</li>
+<li>Can we reject the null hypothesis <span class="math inline">\(H_0\)</span> of the two variables being independent at <span class="math inline">\(95\%\)</span> confidence level?</li>
+<li>Recall the assumptions of <span class="math inline">\(\chi^2\)</span>-test. Is the result about reliable?</li>
+</ul>
+<div id="cell-19" class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.stats <span class="im">import</span> chi2_contingency</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> sns.countplot(data<span class="op">=</span>data[[<span class="st">"Pclass"</span>, <span class="st">"Survived"</span>]], x<span class="op">=</span><span class="st">"Pclass"</span>, hue<span class="op">=</span><span class="st">"Survived"</span>)</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">"Embarked chance within each class"</span>)</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="TP7_CA_sol_files/figure-html/cell-10-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="cell-20" class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Contingincy table</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.crosstab(data[<span class="st">'Pclass'</span>], data[<span class="st">'Survived'</span>])</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df)</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Row profile</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>C <span class="op">=</span> df.<span class="bu">sum</span>(axis<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>R <span class="op">=</span> df.<span class="bu">sum</span>(axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>E <span class="op">=</span> R.values.reshape(<span class="op">-</span><span class="dv">1</span>,<span class="dv">1</span>) <span class="op">@</span> C.values.reshape(<span class="op">-</span><span class="dv">1</span>,<span class="dv">1</span>).transpose()<span class="op">/</span>df.<span class="bu">sum</span>().<span class="bu">sum</span>()</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>chi_stat <span class="op">=</span> np.<span class="bu">sum</span>((df<span class="op">-</span>E) <span class="op">**</span> <span class="dv">2</span><span class="op">/</span>E).<span class="bu">sum</span>()</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'* Chi-square statistic: </span><span class="sc">{</span>chi_stat<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Survived    0   1
+Pclass           
+1          57  50
+2          63  30
+3         146  72
+* Chi-square statistic: 6.693869422819262</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>c:\Users\hasso\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\core\fromnumeric.py:86: FutureWarning:
+
+The behavior of DataFrame.sum with axis=None is deprecated, in a future version this will reduce over both axes and return a scalar. To retain the old behavior, pass axis=0 (or do not pass axis)
+</code></pre>
+</div>
+</div>
+<div id="cell-21" class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.stats <span class="im">import</span> chi2</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="co"># degree of freedom</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>dfr <span class="op">=</span> <span class="dv">2</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>p_value <span class="op">=</span> <span class="dv">1</span> <span class="op">-</span> chi2.cdf(chi_stat, dfr)</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"The p-value associated with the chi-square statistic: </span><span class="sc">{</span>chi_stat<span class="sc">}</span><span class="ss"> is </span><span class="sc">{</span>p_value<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>The p-value associated with the chi-square statistic: 6.693869422819262 is 0.03519206276590603</code></pre>
+</div>
+</div>
+<blockquote class="blockquote">
+<p>With p-value is close to zero, we can reject the null hypothesis of independence between the two variables with confidence level nearly 1.</p>
+</blockquote>
+<p><strong>B. Pclass vs Embarked:</strong></p>
+<ul>
+<li>Perform <span class="math inline">\(\chi^2\)</span>-test on this pair of variables.</li>
+<li>Perform CA on this pair of variables.</li>
+<li>Create <code>symmetric biplot</code> of the resulting CA.</li>
+<li>Interpret the result.</li>
+</ul>
+<div id="cell-24" class="cell" data-execution_count="13">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.stats <span class="im">import</span> chi2_contingency</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> prince</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.crosstab(data[<span class="st">'Pclass'</span>], data[<span class="st">'Embarked'</span>])</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>chi2, p, dof, expected <span class="op">=</span> chi2_contingency(df)</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Chi-squrae staistic: </span><span class="sc">{</span>chi2<span class="sc">}</span><span class="ss"> with p-value: </span><span class="sc">{</span>p<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>ca <span class="op">=</span> prince.CA(n_components<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>ca <span class="op">=</span> ca.fit(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Chi-squrae staistic: 82.83186678873668 with p-value: 4.373384811850251e-17</code></pre>
+</div>
+</div>
+<div id="cell-25" class="cell" data-execution_count="14">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>row_coords <span class="op">=</span> ca.row_coordinates(df)</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>col_coords <span class="op">=</span> ca.column_coordinates(df)</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Plotting the results</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>plt.scatter(row_coords[<span class="dv">0</span>], row_coords[<span class="dv">1</span>], c<span class="op">=</span><span class="st">'red'</span>, s<span class="op">=</span><span class="dv">100</span>, label<span class="op">=</span><span class="st">'Pclass'</span>)</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>plt.scatter(col_coords[<span class="dv">0</span>], col_coords[<span class="dv">1</span>], c<span class="op">=</span><span class="st">'blue'</span>, s<span class="op">=</span><span class="dv">150</span>, label<span class="op">=</span><span class="st">'Embarked'</span>)</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>class_label <span class="op">=</span> {<span class="dv">1</span>: <span class="st">'1st'</span>, <span class="dv">2</span>: <span class="st">'2nd'</span>, <span class="dv">3</span>: <span class="st">'3rd'</span>}</span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Adding labels</span></span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, txt <span class="kw">in</span> <span class="bu">enumerate</span>(df.index.astype(<span class="bu">object</span>)):</span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>    plt.annotate(txt, (row_coords[<span class="dv">0</span>].iloc[i], row_coords[<span class="dv">1</span>].iloc[i]<span class="op">+</span><span class="fl">0.03</span>), color<span class="op">=</span><span class="st">'red'</span>)</span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, txt <span class="kw">in</span> <span class="bu">enumerate</span>(df.columns):</span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a>    plt.annotate(<span class="bu">str</span>(txt), (col_coords[<span class="dv">0</span>][i], col_coords[<span class="dv">1</span>][i]<span class="op">+</span> <span class="fl">0.03</span>), color<span class="op">=</span><span class="st">'blue'</span>)</span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a>plt.vlines(x<span class="op">=</span>[<span class="dv">0</span>], ymax<span class="op">=</span><span class="fl">0.7</span>, ymin<span class="op">=-</span><span class="fl">0.7</span>, linestyles<span class="op">=</span><span class="st">'--'</span>)</span>
+<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a>plt.hlines(y<span class="op">=</span>[<span class="dv">0</span>], xmax<span class="op">=</span><span class="fl">0.75</span>, xmin<span class="op">=-</span><span class="fl">0.75</span>, linestyles<span class="op">=</span><span class="st">'--'</span>)</span>
+<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Correspondence Analysis: Pclass by Embarked'</span>)</span>
+<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Dimension 1'</span>)</span>
+<span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Dimension 2'</span>)</span>
+<span id="cb20-23"><a href="#cb20-23" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb20-24"><a href="#cb20-24" aria-hidden="true" tabindex="-1"></a>plt.grid()</span>
+<span id="cb20-25"><a href="#cb20-25" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>C:\Users\hasso\AppData\Local\Temp\ipykernel_17636\1543237411.py:16: FutureWarning:
+
+Series.__getitem__ treating keys as positions is deprecated. In a future version, integer keys will always be treated as labels (consistent with DataFrame behavior). To access a value by position, use `ser.iloc[pos]`
+</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="TP7_CA_sol_files/figure-html/cell-14-output-2.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<blockquote class="blockquote">
+<p>According to this map, it’s clear that</p>
+</blockquote>
+<ul>
+<li>the 1st class passengers mostly embarked from <strong>Cherbourg</strong></li>
+<li>2nd class and some 3rd passengers embarked from <strong>Southampton</strong></li>
+<li><strong>Queenstown</strong> is the rare category (deviated away from the origin than other variables) of <strong>Embarked</strong> and seem to be associated with the third class passengers than the rest.</li>
+</ul>
+</section>
+<section id="eye-and-hair-color" class="level2">
+<h2 class="anchored" data-anchor-id="eye-and-hair-color">3. Eye and Hair color</h2>
+<p>Study the connection between eye and hair colors from the <code>Eye &amp; Hair Color</code> dataset available in kaggle as <a href="https://www.kaggle.com/datasets/jasleensondhi/hair-eye-color">Hair Eye Color</a>.</p>
+<div id="cell-28" class="cell" data-execution_count="15">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> kagglehub</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Download latest version</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>path <span class="op">=</span> kagglehub.dataset_download(<span class="st">"jasleensondhi/hair-eye-color"</span>)</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pd.read_csv(path<span class="op">+</span><span class="st">'/HairEyeColor.csv'</span>)</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>data.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="15">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Unnamed: 0</th>
+<th data-quarto-table-cell-role="th">Hair</th>
+<th data-quarto-table-cell-role="th">Eye</th>
+<th data-quarto-table-cell-role="th">Sex</th>
+<th data-quarto-table-cell-role="th">Freq</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>1</td>
+<td>Black</td>
+<td>Brown</td>
+<td>Male</td>
+<td>32</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>2</td>
+<td>Brown</td>
+<td>Brown</td>
+<td>Male</td>
+<td>53</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>3</td>
+<td>Red</td>
+<td>Brown</td>
+<td>Male</td>
+<td>10</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>4</td>
+<td>Blond</td>
+<td>Brown</td>
+<td>Male</td>
+<td>3</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>5</td>
+<td>Black</td>
+<td>Blue</td>
+<td>Male</td>
+<td>11</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<ul>
+<li>We sum along variable ‘Sex’ as we are interested in the relation between ‘Hair’ and ‘Eye’. We compute the join distribution of these two variables from the join frequency as follow:</li>
+</ul>
+<div id="cell-30" class="cell" data-execution_count="16">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> data.pivot_table(index<span class="op">=</span><span class="st">'Hair'</span>, columns<span class="op">=</span><span class="st">'Eye'</span>, values<span class="op">=</span><span class="st">'Freq'</span>, aggfunc<span class="op">=</span><span class="st">'sum'</span>, fill_value<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="16">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th">Eye</th>
+<th data-quarto-table-cell-role="th">Blue</th>
+<th data-quarto-table-cell-role="th">Brown</th>
+<th data-quarto-table-cell-role="th">Green</th>
+<th data-quarto-table-cell-role="th">Hazel</th>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">Hair</th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">Black</td>
+<td>20</td>
+<td>68</td>
+<td>5</td>
+<td>15</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">Blond</td>
+<td>94</td>
+<td>7</td>
+<td>16</td>
+<td>10</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">Brown</td>
+<td>84</td>
+<td>119</td>
+<td>29</td>
+<td>54</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">Red</td>
+<td>17</td>
+<td>26</td>
+<td>14</td>
+<td>14</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<ul>
+<li>We perform <span class="math inline">\(\chi^2\)</span>-test on the two variables</li>
+</ul>
+<div id="cell-32" class="cell" data-execution_count="17">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>chi2, p, dof, expected <span class="op">=</span> chi2_contingency(df)</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Chi-squrae staistic: </span><span class="sc">{</span>chi2<span class="sc">}</span><span class="ss"> with p-value: </span><span class="sc">{</span>p<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Chi-squrae staistic: 138.28984162600827 with p-value: 2.3252867870988044e-25</code></pre>
+</div>
+</div>
+<blockquote class="blockquote">
+<p>With such a low p-value, we can reject the null hypothesis the independency hypothesis between the two</p>
+</blockquote>
+<div id="cell-34" class="cell" data-execution_count="18">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> prince</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>ca <span class="op">=</span> prince.CA(n_components<span class="op">=</span><span class="dv">3</span>).fit(df)</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Variance explained by the first two dimensions:</span><span class="ch">\n</span><span class="ss"> </span><span class="sc">{</span>ca<span class="sc">.</span>eigenvalues_summary<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Variance explained by the first two dimensions:
+           eigenvalue % of variance % of variance (cumulative)
+component                                                    
+0              0.209        89.37%                     89.37%
+1              0.022         9.51%                     98.89%
+2              0.003         1.11%                    100.00%</code></pre>
+</div>
+</div>
+<div id="cell-35" class="cell" data-execution_count="19">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plotly.io <span class="im">as</span> pio</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>pio.renderers.default <span class="op">=</span> <span class="st">'notebook'</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>ca.plot(df, show_column_labels<span class="op">=</span><span class="va">True</span>, show_row_markers<span class="op">=</span><span class="va">True</span>, show_row_labels<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="19">
+
+<style>
+  #altair-viz-9ac69106d29643a1888f00e8a2d315df.vega-embed {
+    width: 100%;
+    display: flex;
+  }
+
+  #altair-viz-9ac69106d29643a1888f00e8a2d315df.vega-embed details,
+  #altair-viz-9ac69106d29643a1888f00e8a2d315df.vega-embed details summary {
+    position: relative;
+  }
+</style>
+<div id="altair-viz-9ac69106d29643a1888f00e8a2d315df"></div>
+<script type="text/javascript">
+  var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
+  (function(spec, embedOpt){
+    let outputDiv = document.currentScript.previousElementSibling;
+    if (outputDiv.id !== "altair-viz-9ac69106d29643a1888f00e8a2d315df") {
+      outputDiv = document.getElementById("altair-viz-9ac69106d29643a1888f00e8a2d315df");
+    }
+
+    const paths = {
+      "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
+      "vega-lib": "https://cdn.jsdelivr.net/npm/vega-lib?noext",
+      "vega-lite": "https://cdn.jsdelivr.net/npm/vega-lite@5.20.1?noext",
+      "vega-embed": "https://cdn.jsdelivr.net/npm/vega-embed@6?noext",
+    };
+
+    function maybeLoadScript(lib, version) {
+      var key = `${lib.replace("-", "")}_version`;
+      return (VEGA_DEBUG[key] == version) ?
+        Promise.resolve(paths[lib]) :
+        new Promise(function(resolve, reject) {
+          var s = document.createElement('script');
+          document.getElementsByTagName("head")[0].appendChild(s);
+          s.async = true;
+          s.onload = () => {
+            VEGA_DEBUG[key] = version;
+            return resolve(paths[lib]);
+          };
+          s.onerror = () => reject(`Error loading script: ${paths[lib]}`);
+          s.src = paths[lib];
+        });
+    }
+
+    function showError(err) {
+      outputDiv.innerHTML = `<div class="error" style="color:red;">${err}</div>`;
+      throw err;
+    }
+
+    function displayChart(vegaEmbed) {
+      vegaEmbed(outputDiv, spec, embedOpt)
+        .catch(err => showError(`Javascript Error: ${err.message}<br>This usually means there's a typo in your chart specification. See the javascript console for the full traceback.`));
+    }
+
+    if(typeof define === "function" && define.amd) {
+      requirejs.config({paths});
+      let deps = ["vega-embed"];
+      require(deps, displayChart, err => showError(`Error loading script: ${err.message}`));
+    } else {
+      maybeLoadScript("vega", "5")
+        .then(() => maybeLoadScript("vega-lite", "5.20.1"))
+        .then(() => maybeLoadScript("vega-embed", "6"))
+        .catch(showError)
+        .then(() => displayChart(vegaEmbed));
+    }
+  })({"config": {"view": {"continuousWidth": 300, "continuousHeight": 300}}, "layer": [{"data": {"name": "data-46daac44ed494bb2ac053dc05ee85d86"}, "mark": {"type": "circle", "size": 50}, "encoding": {"color": {"field": "variable", "type": "nominal"}, "tooltip": [{"field": "variable", "type": "nominal"}, {"field": "value", "type": "nominal"}, {"field": "component 0", "type": "quantitative"}, {"field": "component 1", "type": "quantitative"}], "x": {"axis": {"title": "component 0 \u2014 89.37%"}, "field": "component 0", "scale": {"zero": false}, "type": "quantitative"}, "y": {"axis": {"title": "component 1 \u2014 9.51%"}, "field": "component 1", "scale": {"zero": false}, "type": "quantitative"}}, "name": "view_1"}, {"data": {"name": "data-46daac44ed494bb2ac053dc05ee85d86"}, "mark": {"type": "text"}, "encoding": {"text": {"field": "label", "type": "nominal"}, "x": {"axis": {"title": "component 0 \u2014 89.37%"}, "field": "component 0", "scale": {"zero": false}, "type": "quantitative"}, "y": {"axis": {"title": "component 1 \u2014 9.51%"}, "field": "component 1", "scale": {"zero": false}, "type": "quantitative"}}}, {"data": {"name": "data-faa84a36f88fd0eb6ffec918b2e08672"}, "mark": {"type": "circle", "size": 50}, "encoding": {"color": {"field": "variable", "type": "nominal"}, "tooltip": [{"field": "variable", "type": "nominal"}, {"field": "value", "type": "nominal"}, {"field": "component 0", "type": "quantitative"}, {"field": "component 1", "type": "quantitative"}], "x": {"axis": {"title": "component 0 \u2014 89.37%"}, "field": "component 0", "scale": {"zero": false}, "type": "quantitative"}, "y": {"axis": {"title": "component 1 \u2014 9.51%"}, "field": "component 1", "scale": {"zero": false}, "type": "quantitative"}}}, {"data": {"name": "data-faa84a36f88fd0eb6ffec918b2e08672"}, "mark": {"type": "text"}, "encoding": {"text": {"field": "label", "type": "nominal"}, "x": {"axis": {"title": "component 0 \u2014 89.37%"}, "field": "component 0", "scale": {"zero": false}, "type": "quantitative"}, "y": {"axis": {"title": "component 1 \u2014 9.51%"}, "field": "component 1", "scale": {"zero": false}, "type": "quantitative"}}}], "params": [{"name": "param_1", "select": {"type": "interval", "encodings": ["x", "y"]}, "bind": "scales", "views": ["view_1"]}], "$schema": "https://vega.github.io/schema/vega-lite/v5.20.1.json", "datasets": {"data-46daac44ed494bb2ac053dc05ee85d86": [{"component 0": -0.5045624300738993, "component 1": -0.21482045507894243, "component 2": -0.055509089636409624, "variable": "Hair", "value": "Black", "label": "Black"}, {"component 0": 0.8353477691124863, "component 1": -0.06957933676599498, "component 2": -0.016214706272485467, "variable": "Hair", "value": "Blond", "label": "Blond"}, {"component 0": -0.14825270161060333, "component 1": 0.032666345452604426, "component 2": 0.0488041352330628, "variable": "Hair", "value": "Brown", "label": "Brown"}, {"component 0": -0.12952326153059146, "component 1": 0.319642396033267, "component 2": -0.08315117322983123, "variable": "Hair", "value": "Red", "label": "Red"}], "data-faa84a36f88fd0eb6ffec918b2e08672": [{"component 0": 0.5474138867175884, "component 1": -0.08295428212243097, "component 2": 0.004709407991254046, "variable": "Eye", "value": "Blue", "label": "Blue"}, {"component 0": -0.4921576724946368, "component 1": -0.08832151344914264, "component 2": -0.02161130519476094, "variable": "Eye", "value": "Brown", "label": "Brown"}, {"component 0": 0.1617533837812954, "component 1": 0.3390395700927829, "component 2": -0.08759743714191769, "variable": "Eye", "value": "Green", "label": "Green"}, {"component 0": -0.21259692749961437, "component 1": 0.16739108741070816, "component 2": 0.10051828389043796, "variable": "Eye", "value": "Hazel", "label": "Hazel"}]}}, {"mode": "vega-lite"});
+</script>
+</div>
+</div>
+<blockquote class="blockquote">
+<p>The first two dimensions can explain more than 98% of the total inertia of the data. Based on this biplot, one can see the association between eye and hair color as follow:</p>
+</blockquote>
+<ul>
+<li>People who are blond tend to have blue eye color.</li>
+<li>People with red hair color tend to have green eye color. Moreover, this appears to be rare eye color as it deviates away from the origin.</li>
+<li>The graph also suggest that people with hazel eye color seen to have brown hair color and also red.</li>
+<li>Lastly, black hair people are likely to have brown eye color.</li>
+</ul>
+</section>
+<section id="countries-and-languages" class="level2">
+<h2 class="anchored" data-anchor-id="countries-and-languages">4. Countries and languages</h2>
+<p>Reproduce results of the association between countries and primary language spoken within those countries conducted <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC3718710/">here</a>. The contingency table of country of residence and primary language spoken is given below:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 28%">
+<col style="width: 12%">
+<col style="width: 11%">
+<col style="width: 12%">
+<col style="width: 11%">
+<col style="width: 12%">
+<col style="width: 10%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Country&nbsp;Language</th>
+<th style="text-align: center;">English</th>
+<th style="text-align: center;">French</th>
+<th style="text-align: center;">Spanish</th>
+<th style="text-align: center;">German</th>
+<th style="text-align: center;">Italian</th>
+<th style="text-align: center;">Total</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Canada</td>
+<td style="text-align: center;">688</td>
+<td style="text-align: center;">280</td>
+<td style="text-align: center;">10</td>
+<td style="text-align: center;">11</td>
+<td style="text-align: center;">11</td>
+<td style="text-align: center;">1000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">USA</td>
+<td style="text-align: center;">730</td>
+<td style="text-align: center;">31</td>
+<td style="text-align: center;">190</td>
+<td style="text-align: center;">8</td>
+<td style="text-align: center;">41</td>
+<td style="text-align: center;">1000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">England</td>
+<td style="text-align: center;">798</td>
+<td style="text-align: center;">74</td>
+<td style="text-align: center;">38</td>
+<td style="text-align: center;">31</td>
+<td style="text-align: center;">59</td>
+<td style="text-align: center;">1000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Italy</td>
+<td style="text-align: center;">17</td>
+<td style="text-align: center;">13</td>
+<td style="text-align: center;">11</td>
+<td style="text-align: center;">15</td>
+<td style="text-align: center;">944</td>
+<td style="text-align: center;">1000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Switzerland</td>
+<td style="text-align: center;">15</td>
+<td style="text-align: center;">222</td>
+<td style="text-align: center;">20</td>
+<td style="text-align: center;">648</td>
+<td style="text-align: center;">95</td>
+<td style="text-align: center;">1000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Total</td>
+<td style="text-align: center;">2248</td>
+<td style="text-align: center;">620</td>
+<td style="text-align: center;">269</td>
+<td style="text-align: center;">713</td>
+<td style="text-align: center;">1150</td>
+<td style="text-align: center;">5000</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>You should work out this part as a real practical task by following this <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC3718710/">article</a>.</li>
+</ul>
+<div id="cell-39" class="cell" data-execution_count="20">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># To do</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="further-readings" class="level1">
+<h1>Further Readings</h1>
+<ul>
+<li><a href="https://scikit-learn.org/dev/modules/generated/sklearn.decomposition.PCA.html">PCA, sklearn</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Low-rank_approximation">Low-rank approximation problem</a></li>
+<li><a href="https://builtin.com/data-science/step-step-explanation-principal-component-analysis">Principal Component Analysis (PCA)</a></li>
+<li><a href="https://www.kaggle.com/datasets/halimedogan/usarrests">USarrests Kaggle Dataset</a></li>
+<li><a href="https://www.kaggle.com/datasets/uciml/autompg-dataset">Auto-MPG Kaggle Dataset</a></li>
+</ul>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
