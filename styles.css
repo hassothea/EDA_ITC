@@ -26,6 +26,14 @@
     border-radius: 5px; /* Optional: Add rounded corners */
 }
 
+.blue {
+    color: #2558afff;
+}
+
+.center, [align="center"] {
+  text-align: center;
+  display: block;
+}
 
 img[src*='#left'] {
     float: left;
