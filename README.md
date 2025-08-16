@@ -3,8 +3,7 @@
 style="position: relative; bottom: -5px;width:0.69444in" />
 <img src="./img/itc.png#left"
 style="position: relative; bottom: -5px;width:0.48611in" />
-<a href="https://hassothea.github.io/">HAS Sothea, PhD</a>
-2025-08-16
+<a href="https://hassothea.github.io/">Lecturer: HAS Sothea, PhD</a>
 
 - [👋 Introduction](#-introduction)
 - [📝 Course Criteria](#-course-criteria)
@@ -91,12 +90,7 @@ it!”*</span>
 
 # 📋 Course session
 
-**Note**: The following table of contents will be progressively updated
-according to the course advancement.
-
-| Topic                   | TP  | Solution  | Remark       |
-|:------------------------|:----|:----------|:-------------|
-| 1\. Univariate Analysis | TP1 | Solution1 | `...loading` |
+> **Visit the webpage:** [EDA & Unsupervised Learning](https://hassothea.github.io/EDA_ITC/).
 
 <!--](https://hassothea.github.io/EDA_ITC/TPs/TP3_Data_Preprocessing.html){target="_blank"} | [TP3-solution](https://hassothea.github.io/EDA_ITC/Solutions/TP3_Data_Preprocessing_sol.html){target="_blank"} | ✅ Completed | -->
 
@@ -185,3 +179,4 @@ papers, and online courses, to further your understanding of
   target="_blank">R for Data Science, Hadley W. and Garrett G.</a>
 
 ------------------------------------------------------------------------
+
