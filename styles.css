@@ -4,9 +4,78 @@
     margin-bottom: 5px;
 }
 
+.red {
+    color: #b42121;
+}
 
+.white {
+    color: #ffffff;
+}
+
+.light-red {
+    color: #ee2c2c;
+}
+
+.blue {
+    color: #345a8b;
+}
+
+.light-blue {
+    color: #394ae0;
+}
+
+.orange{
+    color: #e2a555;
+}
+
+.purple {
+    color: rgba(173, 69, 204, 0.863);
+}
+
+.green {
+    color: #53a343;
+}
+
+.blur {
+    color: #dbdedf;
+}
+
+.vbr {
+    display: block;
+    padding: 0 -10px; /* Smaller padding */
+}
+
+.vbr20 {
+    display: block;
+    margin: -20px 0; /* Smaller padding */
+}
+
+.vbr30 {
+    display: block;
+    margin: -30px 0; /* Smaller padding */
+}
+
+.vbr40 {
+    display: block;
+    margin: -40px 0; /* Smaller padding */
+}
+
+.vbr50 {
+    display: block;
+    margin: -50px 0; /* Smaller padding */
+}
+
+.secbr {
+    display: block;
+    margin: 50px 0; /* Adjust the vertical space as needed */
+}
 
 .br0 {
+    display: block;
+    margin: 5px 0; /* Adjust the vertical space as needed */
+}
+
+.br1 {
     display: block;
     margin: 10px 0; /* Adjust the vertical space as needed */
 }
@@ -14,6 +83,13 @@
 .footnote {
     font-size: 0.6em; /* Set the font size */
     margin-top: 1px;  /* Set the space from the text above */
+}
+
+.section{
+    font-size: 1.1em; /* Set the font size */
+    margin-top: 1px;  /* Set the space from the text above */
+    font-weight: 500;
+    color: #345a8b;
 }
 
 .notes {
@@ -26,22 +102,8 @@
     border-radius: 5px; /* Optional: Add rounded corners */
 }
 
-.blue {
-    color: #2558afff;
-}
-
-.center, [align="center"] {
-  text-align: center;
-  display: block;
-}
-
-img[src*='#left'] {
-    float: left;
-}
-img[src*='#right'] {
-    float: right;
-}
-img[src*='#center'] {
-    display: block;
+.centering {
     margin: auto;
-}
+    width: 50%;
+    padding: 10px;
+  }

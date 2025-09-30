@@ -1,0 +1,36 @@
+/*-- scss:defaults --*/
+
+$body-bg: #ffffff;
+$body-color: #000000;
+$link-color: 	#208edc; /*#deae1d; #187bcd; #e6ac1a*/
+$presentation-heading-color: #345a8b;// #15797A; // #208edc;
+$presentation-heading-text-transform: capitalize;
+/*-- scss:rules --*/
+
+.reveal .slide blockquote {
+  border-left: 3px solid $text-muted;
+  padding-left: 0.5em;
+}
+
+/*-- scss:logo --*/
+
+.reveal .slide-logo {
+  display: block;
+  position: fixed;
+  bottom: unset !important;
+  left: unset !important;
+  top: 10px;
+  right: 20px;
+  height: 30px !important;
+  width: 40x !important;
+  max-width: unset !important;
+  max-height: unset !important;
+}
+
+.slide-number, .reveal.has-logo .slide-number {
+  bottom: 10px !important;
+  right: 10px !important;
+  left: unset !important;
+  top: unset !important;
+  color: #777777 !important;
+}
