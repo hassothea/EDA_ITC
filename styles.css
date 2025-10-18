@@ -28,6 +28,10 @@
     color: #e2a555;
 }
 
+.yellow{
+    color: #ffcc00; /* #c9c124; */
+}
+
 .purple {
     color: rgba(173, 69, 204, 0.863);
 }
