@@ -20,6 +20,11 @@
     color: #345a8b;
 }
 
+.sbr {
+    display: block;
+    margin: -30px 0; /* Adjust the vertical space as needed */
+}
+
 .light-blue {
     color: #394ae0;
 }
@@ -106,4 +111,5 @@
     margin: auto;
     width: 50%;
     padding: 10px;
+
   }
