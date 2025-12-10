@@ -85,6 +85,32 @@
     margin: 10px 0; /* Adjust the vertical space as needed */
 }
 
+.up1 {
+    display: block;
+    margin: -10px 0; /* Adjust the vertical space as needed */
+    /*padding: -10px 0; /* Smaller padding */
+}
+
+.up2 {
+    display: block;
+    margin: -20px 0; /* Smaller padding */
+}
+
+.up3 {
+    display: block;
+    margin: -30px 0;  /* Smaller padding */
+}
+
+.up4 {
+    display: block;
+    margin: -40px 0; /* Smaller padding */
+}
+
+.up5 {
+    display: block;
+    margin: -50px 0; /* Smaller padding */
+}
+
 .footnote {
     font-size: 0.6em; /* Set the font size */
     margin-top: 1px;  /* Set the space from the text above */
@@ -113,3 +139,4 @@
     padding: 10px;
 
   }
+
