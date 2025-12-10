@@ -123,6 +123,15 @@
     color: #345a8b;
 }
 
+.box {
+  border: 1px solid #333;
+  background-color: #ccfae1fc;
+  padding: 2px 6px;       /* Top/Bottom, Left/Right */
+  border-radius: 5px;     /* Optional: Rounded corners */
+  display: inline-block;  /* Keeps the box structure clean within text */
+  font-family: monospace; /* Optional: acts like code highlighting */
+}
+
 .notes {
     position: absolute;
     bottom: 10px; /* Adjust the distance from the bottom */
@@ -139,4 +148,5 @@
     padding: 10px;
 
   }
+
 
