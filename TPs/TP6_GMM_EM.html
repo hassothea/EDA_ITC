@@ -142,15 +142,15 @@ window.Quarto = {
 <ul>
 <li>If <span class="math inline">\(x\in\mathbb{R}\)</span>, assume the following parameters:
 <ul>
-<li><span class="math inline">\(K = 3,\)</span> and <span class="math inline">\(\pi_k\)</span> be the proportion of each group <span class="math inline">\(k=1,2,3\)</span>.</li>
-<li><span class="math inline">\(f_k(x)=\mathcal{N}(\mu_k, \sigma^2)\)</span> for any <span class="math inline">\(k=1,2,3\)</span> with <span class="math inline">\(\mu\in\mathbb{R}\)</span> and <span class="math inline">\(\sigma&gt;0\)</span>. What includes in the parameter <span class="math inline">\(\theta\)</span> of this model? Write the explicit formula for likelihood function of this 1D GMM model for a given observation <span class="math inline">\(\{x_1,\dots,x_n\}\)</span>: <span class="math display">\[L_{\text{obs}}(\theta)=p(\theta|x_1,\dots,x_n)?\]</span></li>
+<li><span class="math inline">\(K = 3,\)</span> and <span class="math inline">\((\pi_k)\)</span> with <span class="math inline">\(\sum_{k=1}^K\pi_k=1\)</span>, the proportion of group <span class="math inline">\(k=1,\dots,K\)</span>.</li>
+<li><span class="math inline">\(f_k(x)=\mathcal{N}(\mu_k, \sigma_k^2)\)</span> for any <span class="math inline">\(k=1,\dots,K\)</span> with <span class="math inline">\(\mu\in\mathbb{R}\)</span> and <span class="math inline">\(\sigma_k&gt;0\)</span>. What includes in the parameter <span class="math inline">\(\theta\)</span> of this model? Write the explicit formula for likelihood function of this 1D GMM model for a given observation <span class="math inline">\(\{x_1,\dots,x_n\}\)</span>: <span class="math display">\[L_{\text{obs}}(\theta)=p(\theta|x_1,\dots,x_n)?\]</span></li>
 </ul></li>
 <li>Write the explicit formula for the corresponding observed log-likehood of this 1d GMM model: <span class="math display">\[\mathcal{L}_{\text{obs}}(\theta)=p(\theta|x_1,\dots,x_n).\]</span></li>
 </ul>
 <p><strong>B. Complete Log-Likelihood Function:</strong></p>
 <ul>
 <li><p>By introducing latent variables <span class="math inline">\(Z_i=(z_{i1},\dots,z_{iK})\in \{0,1\}^K\)</span> such that <span class="math inline">\(\sum_{k=1}^Kz_{ik}=1\)</span> with <span class="math inline">\(Z_i|x_i\sim \mathcal{M}(\gamma_{i1},\dots,\gamma_{iK})\)</span> for all <span class="math inline">\(i=1,2,\dots,n\)</span>. What is the dimension of <span class="math inline">\(\Gamma=(\gamma_{ik})?\)</span> Write the explicit formula for the complete likelihood function for the observations <span class="math inline">\(x_1,\dots,x_n\)</span>: <span class="math display">\[L_{\text{com}}(\theta,\Gamma)=p(\theta,\Gamma|x_1,\dots,x_n,z_1,\dots,z_n).\]</span></p></li>
-<li><p>Write the complete log-likelihood function for this 1D GMM model: <span class="math display">\[\mathcal{L}_{\text{com}}(\theta)=p(\theta,\Gamma|x_1,\dots,x_n,z_1,\dots,z_n).\]</span></p></li>
+<li><p>Write the complete log-likelihood function for this 1D GMM model: <span class="math display">\[\mathcal{L}_{\text{com}}(\theta,\Gamma)=p(\theta,\Gamma|x_1,\dots,x_n,z_1,\dots,z_n).\]</span></p></li>
 </ul>
 <p><strong>C. Explicit ELBO:</strong></p>
 <ul>
@@ -182,7 +182,7 @@ window.Quarto = {
 <div id="cell-9" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># To do</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p><strong>D.</strong> Repeat question <strong>B</strong> and <strong>C</strong> on a simulated data from the <a href="https://hassothea.github.io/EDA_ITC/TPs/TP4_Clustering.html">previous <code>TP4</code></a>. How is GMM’s result compared to Kmeans or Hierarchical clustering?</p>
+<p><strong>D.</strong> Repeat question <strong>B</strong> and <strong>C</strong> on a simulated data from the <a href="https://hassothea.github.io/EDA_ITC/TPs/TP5_Clustering.html">previous <code>TP5</code></a>. How is GMM’s result compared to Kmeans or Hierarchical clustering?</p>
 <div id="cell-11" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># To do</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
